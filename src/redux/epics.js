@@ -1,6 +1,8 @@
 import { combineEpics } from 'redux-observable'
-import { intisEpic } from '../scenes/Home/redux/epics'
+import { epics as homeEpics } from '../scenes/Home'
 
 export default combineEpics(
-  intisEpic
+  homeEpics.dayEpics.changeDayEpic,
+  homeEpics.dayEpics.initEpic,
+  homeEpics.dayEpics.fetchDayEpic
 )

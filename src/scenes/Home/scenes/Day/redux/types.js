@@ -1,0 +1,6 @@
+export const DAY_CHANGE = 'DAY_CHANGE'
+export const DAY_CHANGED = 'DAY_CHANGED'
+export const INIT = 'INIT'
+export const INIT_SUCCESS = 'INIT_SUCCESS'
+export const FETCHING = 'FETCHING'
+export const FETCH_SUCCESS = 'FETCH_SUCCESS'

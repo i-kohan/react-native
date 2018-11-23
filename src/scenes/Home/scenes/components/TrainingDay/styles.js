@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignSelf: 'center',
+  list: {
+    width: 300,
+    marginTop: 10
   }
 })

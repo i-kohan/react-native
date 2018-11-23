@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-import home from '../scenes/Home/redux/reducers'
+
+import { reducer as day } from '../scenes/Day'
 
 export default combineReducers({
-  home
+  day
 })

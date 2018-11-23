@@ -1,0 +1,79 @@
+{
+  "monday": {
+    "id": 1,
+    "schedule": [
+      {
+        "label": "Legs"
+      },
+      {
+        "label": "Shoulders"
+      }
+    ]
+  },
+  "tuesday": {
+    "id": 2,
+    "schedule": [
+      {
+        "label": "back"
+      },
+      {
+        "label": "biceps"
+      }
+    ]
+  },
+  "wednesday": {
+    "id": 3,
+    "schedule": [
+      {
+        "label": "chest"
+      },
+      {
+        "label": "triceps"
+      }
+    ]
+  },
+  "thursday": {
+    "id": 4,
+    "schedule": [
+      {
+        "label": "Legs"
+      },
+      {
+        "label": "Arms"
+      }
+    ]
+  },
+  "friday": {
+    "id": 5,
+    "schedule": [
+      {
+        "label": "Legs"
+      },
+      {
+        "label": "Arms"
+      }
+    ]
+  },
+  "saturday": {
+    "id": 6,
+    "schedule": [
+      {
+        "label": "Legs"
+      },
+      {
+        "label": "Arms"
+      }
+    ]
+  },
+  "sunday": {
+    "id": 7,
+    "schedule": [
+      {
+        "label": "Legs"
+      },
+      {
+        "label": "Arms"
+      }
+    ]
+  }
+}

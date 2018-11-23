@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { compose } from 'redux'
 import { withHandlers, withProps } from 'recompose'
-import { Button, Text, View, TouchableOpacity, Image } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import styles from './styles'
@@ -11,7 +11,7 @@ const CalendarHeaderComponent = ({ currentDay, onChange }) => (
   <View style={styles.containter}>
     <TouchableOpacity
       style={[styles.button, styles.leftButton]}
-      onPress={() => onChange(1)}
+      onPress={() => onChange(-1)}
     >
       <Icon
         name='chevron-left'
@@ -21,7 +21,7 @@ const CalendarHeaderComponent = ({ currentDay, onChange }) => (
     <Text>{currentDay}</Text>
     <TouchableOpacity
       style={[styles.button, styles.rightButton]}
-      onPress={() => onChange(-1)}
+      onPress={() => onChange(1)}
     >
       <Icon
         name='chevron-right'
