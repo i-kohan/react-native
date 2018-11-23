@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, ActivityIndicator } from 'react-native'
 
-import { CalendarHeader, TrainingDay } from '../components'
+import { CalendarHeader, TrainingDay, ModalContent } from './components'
 
-import { getCurrentDate, getLoading, getDaySchedule } from './redux/selectors'
+import { getCurrentDate, getLoading, getDaySchedule, getModalVisibility } from './redux/selectors'
 
-import { dayChange, init } from './redux/actions'
+import { dayChange, init, openModal, closeModal } from './redux/actions'
 
 
 import styles from './styles'
@@ -14,22 +14,34 @@ import styles from './styles'
 const mapStateToProps = state => ({
   currentDate: getCurrentDate(state),
   loading: getLoading(state),
-  daySchedule: getDaySchedule(state)
+  daySchedule: getDaySchedule(state),
+  isModalVisible: getModalVisibility(state) 
 })
 
 const mapDispatchToProps = dispatch => ({
   init: () => dispatch(init),
-  onDayChange: (days) => dispatch(dayChange(days))
+  onDayChange: (days) => dispatch(dayChange(days)),
+  openModal: (id) => dispatch(openModal(id)),
+  closeModal: () => dispatch(closeModal)
 })
 
-class Day extends React.Component {
+class Day extends React.PureComponent {
 
   componentDidMount() {
     this.props.init()
   }
 
   render() {
-    const { currentDate, onDayChange, loading, daySchedule } = this.props
+    const {
+      openModal,
+      closeModal,
+      onDayChange,
+      currentDate,
+      loading,
+      daySchedule,
+      isModalVisible
+    } = this.props
+    console.log(isModalVisible)
     return (
       <View style={styles.containter}>
         <CalendarHeader
@@ -39,10 +51,15 @@ class Day extends React.Component {
         {loading ? (
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
-          <TrainingDay 
+          <TrainingDay
+            openModal={openModal}
+            closeModal={closeModal}
             day={daySchedule}
           />
         )}
+        {/* <ModalContent
+          isModalVisible={isModalVisible}  
+        /> */}
       </View>
     )
   }

@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native'
 export default styles = StyleSheet.create({
   containter: {
     flexDirection: 'row',
+    marginTop: 40,
+    marginBottom: 20
   },
   button: {
     color: 'black'
@@ -12,5 +14,10 @@ export default styles = StyleSheet.create({
   },
   leftButton: {
     marginRight: 10
+  },
+  currentDay: {
+    width: 100,
+    textAlign: 'center',
+    fontSize: 16
   }
 })

@@ -5,13 +5,16 @@ import {
   INIT,
   DAY_CHANGED,
   FETCHING,
-  FETCH_SUCCESS
+  FETCH_SUCCESS,
+  OPEN_MODAL,
+  CLOSE_MODAL
 } from './types'
 
 const initialState = {
   loading: true,
   daySchedule: {},
-  currentDate: moment()
+  currentDate: moment(),
+  isModalVisible: false
 }
 
 export default reducer = (state = initialState, action) => {
@@ -28,7 +31,11 @@ export default reducer = (state = initialState, action) => {
       return { ...state, loading: true }
     case FETCH_SUCCESS:
       return { ...state, ...payload, loading: false }
-    default: 
+    case OPEN_MODAL: 
+      return { ...state, isModalVisible: true }
+    case CLOSE_MODAL:
+      return { ...state, isModalVisible: false }
+    default:
       return state
   }
 }

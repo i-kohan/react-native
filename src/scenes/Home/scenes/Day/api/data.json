@@ -1,77 +1,123 @@
 {
   "monday": {
-    "id": 1,
+    "id": "1",
     "schedule": [
       {
+        "id": "1",
         "label": "Legs"
       },
       {
+        "id": "11",
         "label": "Shoulders"
       }
     ]
   },
   "tuesday": {
-    "id": 2,
+    "id": "2",
     "schedule": [
       {
+        "id": "11",
         "label": "back"
       },
       {
+        "id": "12",
         "label": "biceps"
       }
     ]
   },
   "wednesday": {
-    "id": 3,
+    "id": "3",
     "schedule": [
       {
+        "id": "11",
         "label": "chest"
       },
       {
+        "id": "12",
         "label": "triceps"
       }
     ]
   },
   "thursday": {
-    "id": 4,
+    "id": "4",
     "schedule": [
       {
+        "id": "11",
         "label": "Legs"
       },
       {
+        "id": "12",
         "label": "Arms"
       }
     ]
   },
   "friday": {
-    "id": 5,
+    "id": "5",
     "schedule": [
       {
+        "id": "11",
         "label": "Legs"
       },
       {
+        "id": "12",
+        "label": "Arms"
+      },
+      {
+        "id": "13",
+        "label": "Legs"
+      },
+      {
+        "id": "14",
+        "label": "Arms"
+      },
+      {
+        "id": "15",
+        "label": "Legs"
+      },
+      {
+        "id": "16",
+        "label": "Arms"
+      },
+      {
+        "id": "17",
+        "label": "Legs"
+      },
+      {
+        "id": "18",
+        "label": "Arms"
+      },
+      {
+        "id": "19",
+        "label": "Legs"
+      },
+      {
+        "id": "2",
         "label": "Arms"
       }
     ]
   },
   "saturday": {
-    "id": 6,
+    "id": "6",
     "schedule": [
       {
+        "id": "11",
         "label": "Legs"
       },
       {
+        "id": "12",
         "label": "Arms"
       }
     ]
   },
   "sunday": {
-    "id": 7,
+    "id": "7",
     "schedule": [
       {
+        "id": "11",
         "label": "Legs"
       },
       {
+        "id": "12",
         "label": "Arms"
       }
     ]

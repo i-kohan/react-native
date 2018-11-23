@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { compose } from 'redux'
-import { withHandlers, withProps } from 'recompose'
+import { withHandlers, withProps, pure } from 'recompose'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
@@ -18,7 +18,7 @@ const CalendarHeaderComponent = ({ currentDay, onChange }) => (
         type='font-awesome' 
       />
     </TouchableOpacity>
-    <Text>{currentDay}</Text>
+    <Text style={styles.currentDay}>{currentDay}</Text>
     <TouchableOpacity
       style={[styles.button, styles.rightButton]}
       onPress={() => onChange(1)}
@@ -39,5 +39,5 @@ export const CalendarHeader = compose(
     onChange: props => (direction) => {
       props.dayChange(direction)
     }
-  })
-)(CalendarHeaderComponent)
+  }),
+)(pure(CalendarHeaderComponent))

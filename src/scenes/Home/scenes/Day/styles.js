@@ -6,6 +6,5 @@ export default styles = StyleSheet.create({
     width: 300,
     flexDirection: 'column',
     alignSelf: 'flex-start',
-    marginTop: 100
   },
 })
