@@ -22,6 +22,12 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.mycompany.myapp",
+      "versionCode": 2,
+      "permissions": [],
+      "icon": "./assets/icon.png"
     }
   }
 }

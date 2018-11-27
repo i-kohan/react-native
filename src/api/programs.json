@@ -3,12 +3,13 @@
     "id": "1",
     "name": "legs",
     "title": "Program of legs trainig",
+    "description": "Программа расчитана на прокачку ног, очень полезные упражнения, которые помогут за месяц привести ваши ноги в порядок!",
     "exercises": [
       {
         "id": "1",
         "title": "Поднимание сидя",
         "imageURL": "https://media1.tenor.com/images/692ba1d736d2972e39a42020bd6f525b/tenor.gif",
-        "description": "Hello asjdhfl fgh s;l gk; jg;ldsjg;lsdfjgdkjsh fgklds ghlkdfg hlsd"
+        "description": "Очень полезное упражнение для ваших ног, используйте гифку ниже, чтобы узнать, как правильно выполнять упражнение"
       },
       {
         "id": "2",
@@ -22,6 +23,7 @@
     "id": "2",
     "name": "back",
     "title": "Program of Back training",
+    "description": "Программа расчитана на прокачку спины, очень полезные упражнения, которые помогут за месяц привести вашу спину в порядок!",
     "exercises": [
       {
         "id": "1",

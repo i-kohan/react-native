@@ -1,7 +1,16 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { Scene, Router, Modal, Lightbox } from 'react-native-router-flux'
+import { Icon } from 'react-native-elements'
 
 import * as Routes from '../scenes'
+
+import styles from './styles'
+
+const TabIcon = (name) => ({ focused }) => (
+  <Icon name={name} type='font-awesome' color={focused ? 'red' : 'black'}/>
+)
+
 
 const RouterComponent = () => (
   <Router>
@@ -9,21 +18,27 @@ const RouterComponent = () => (
       <Scene
         key="tabbar"
         hideNavBar
+        duration={1}
         tabs
-        tabBarStyle={{ backgroundColor: '#FFFFFF' }}
+        tabBarStyle={styles.tabBarStyle}
       >
-        <Scene key="home" title="Training Day">
+        <Scene
+          key="home"
+          title="Training Day"
+          icon={TabIcon('calendar')}
+          tabBarLabel=''>
           <Scene
+            rightButtonIconStyle={{width: 50, height: 50}}
+            rightButtonImage={{uri: "https://cdn1.iconfinder.com/data/icons/flat-and-simple-part-1/128/plus_round-512.png"}}
+            onRight={({ navigation }) => console.log(navigation.state.params)}
             key="traingingPage"
             component={Routes.HomeScene}
-            title="Training day"
-            hideNavBar />
+            title="Training day" />
         </Scene>
-        <Scene key="programs" title="Programs" initial>
+        <Scene key="programs" title="Programs" initial icon={TabIcon('list-ul')}>
           <Scene
             key="programs"
-            title="Programs"
-            hideNavBar
+            title="Training programs"
             initial
             component={Routes.ProgramsScene} />
         </Scene>

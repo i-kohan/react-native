@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, FlatList } from 'react-native'
+import { View, FlatList, Text } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 import { pure } from 'recompose'
 
@@ -10,7 +10,7 @@ const renderItem = (onClick) => ({ item }) => (
     title={item.title}
     rightIcon={{ name: 'chevron-right' }}
     subtitle="hello"
-    onPress={onClick(item.id)}
+    onPress={onClick(item)}
   />
 )
 

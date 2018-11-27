@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
-  list: {
-    width: '100%',
-    marginBottom: 100
+  programs: {
+    marginTop: 10
   }
 })

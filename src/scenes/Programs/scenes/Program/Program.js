@@ -1,33 +1,73 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { withProps, compose } from 'recompose'
-import { View, Text, Image, ActivityIndicator } from 'react-native'
+import { View, Text, Image, ActivityIndicator, ScrollView, AsyncStorage } from 'react-native'
 
 import { List } from '../../../../components'
 
-import { getProgramById } from '../../redux/selectors'
+import { setProgramThatDay } from '../../../../asyncStorage/setProgram'
+import styles from './styles'
+import { Button } from 'react-native';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    program: getProgramById(ownProps.id)(state),
+class Program extends React.Component {
+
+  state = {
+    selectedExercise: ''
+  }
+
+  addToDay = async () => {
+    const selected = this.state.selectedExercise
+    setProgramThatDay(selected)
+  } 
+
+  onSelectExercise = (id) => {
+    const isOpened = this.state.selectedExercise === id
+    const selectedExercise = isOpened ? '' : id
+    this.setState({ selectedExercise })
+  }
+
+  renderCollapsibleArea = (item) => {
+    console.log(item.imageURL)
+    return (
+      <View>
+        <View style={styles.areaItem}>
+          <Text style={styles.descriptionItemTitle}>Description:</Text>
+          <Text style={styles.descriptionItem}>{item.description}</Text>
+        </View>
+        <View>
+          <Image
+            style={styles.image}
+            source={{ uri: item.imageURL }}
+          />
+        </View>
+      </View>
+    )
+  }
+
+  render() {
+    const { selectedExercise } = this.state
+    const {
+      exercises,
+      name,
+      description
+    } = this.props.program
+    return (
+      <ScrollView>
+        <Text style={styles.descriptionProgramTitle}>Description of program:</Text>
+        <Text style={styles.descriptionProgram}>{description}</Text>
+        <List
+          selectedItem={selectedExercise}
+          onPressFn={this.onSelectExercise}
+          options={exercises}
+          renderCollapsibleArea={this.renderCollapsibleArea}
+        />
+        <View style={styles.assignButton}>
+          <Button
+            title="Assign this program to shedule"
+            onPress={this.addToDay}
+          />
+        </View>
+      </ScrollView>
+    )
   }
 }
 
-const Program = ({ program }) => {
-  const {
-    exercises,
-    name,
-    title
-  } = program
-  return (
-    <View>
-      <Text>{title}</Text>
-      <List
-        onPressFn={() => console.log(123)}
-        options={exercises}
-      />
-    </View>
-  )
-}
-
-export const ProgramScene = connect(mapStateToProps)(Program)
+export const ProgramScene = Program

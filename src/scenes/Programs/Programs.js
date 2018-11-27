@@ -6,8 +6,10 @@ import { getPrograms, getLoading } from './redux/selectors'
 import { init } from './redux/actions'
 
 import { ProgramsList, Modal } from '../../components'
+import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
-import { ModalContent } from '../Home/scenes/Day/components';
+
+import styles from './styles'
 
 const mapStateToProps = state => ({
   programs: getPrograms(state),
@@ -19,13 +21,19 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class Programs extends React.Component {
-  
+
   componentDidMount() {
     this.props.init()
+    console.log(this.props)
   }
+  // Actions.refresh({ renderRightButton: this.renderRightButton })
 
-  routeToProgram = (id) => () => {
-    Actions.program({ id })
+  // renderRightButton = () => (
+  //   <Icon name='list-ul' type='font-awesome' onPress={() => console.log} />
+  // )
+
+  routeToProgram = (program) => () => {
+    Actions.program({ program, title: program.title })
   }
 
   render() {
@@ -35,15 +43,12 @@ class Programs extends React.Component {
     } = this.props
 
     return (
-      <View>
+      <View style={styles.programs}>
         {loading ? (
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
-          // <ModalContent>          
-            <ProgramsList options={programs} onClick={this.routeToProgram}/>
-          // </ModalContent>
+          <ProgramsList options={programs} onClick={this.routeToProgram}/>
         )}
-        <Button title="Go to program" onPress={() => null}/>
       </View>
     )
   }
