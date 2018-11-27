@@ -4,7 +4,8 @@ export default styles = StyleSheet.create({
   containter: {
     flexDirection: 'row',
     marginTop: 40,
-    marginBottom: 20
+    marginBottom: 20,
+    alignSelf: "center"
   },
   button: {
     color: 'black'

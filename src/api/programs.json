@@ -1,0 +1,40 @@
+[
+  {
+    "id": "1",
+    "name": "legs",
+    "title": "Program of legs trainig",
+    "exercises": [
+      {
+        "id": "1",
+        "title": "Поднимание сидя",
+        "imageURL": "https://media1.tenor.com/images/692ba1d736d2972e39a42020bd6f525b/tenor.gif",
+        "description": "Hello asjdhfl fgh s;l gk; jg;ldsjg;lsdfjgdkjsh fgklds ghlkdfg hlsd"
+      },
+      {
+        "id": "2",
+        "title": "Развод ног",
+        "imageURL": "https://media1.tenor.com/images/db65b2a4ee43d1205a89f76945d81de3/tenor.gif",
+        "description": "Lhlkdhjslfkjadhs ljs dhfs foasd hfsf oiasdhf pasduhfpoasd hfasdf hjpasdfhas"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "back",
+    "title": "Program of Back training",
+    "exercises": [
+      {
+        "id": "1",
+        "description": "hhsadfJ juaoisd ufjs fdaushfausdhf p[iwqrhasdfiuhasdpofher8upqowho34;lsndf",
+        "imageURL": "https://i.giphy.com/media/fA3HAbFAXoXRe/source.gif",
+        "title": "Тяга"
+      },
+      {
+        "id": "2",
+        "description": "hhsadfJ juaoisd ufjs fdaushfausdhf p[iwqrhasdfiuhasdpofher8upqowho34;lsndf",
+        "title": "Подтягивания",
+        "imageURL": "https://media1.tenor.com/images/044860a8a6106a7e0a63e013992346de/tenor.gif"
+      }
+    ]
+  }
+]

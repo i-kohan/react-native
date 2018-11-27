@@ -41,7 +41,6 @@ class Day extends React.PureComponent {
       daySchedule,
       isModalVisible
     } = this.props
-    console.log(isModalVisible)
     return (
       <View style={styles.containter}>
         <CalendarHeader
@@ -53,13 +52,13 @@ class Day extends React.PureComponent {
         ) : (
           <TrainingDay
             openModal={openModal}
-            closeModal={closeModal}
             day={daySchedule}
           />
         )}
-        {/* <ModalContent
-          isModalVisible={isModalVisible}  
-        /> */}
+        <ModalContent
+          visible={isModalVisible}
+          onClose={closeModal}  
+        />
       </View>
     )
   }

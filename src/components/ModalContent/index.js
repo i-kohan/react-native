@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Text, Button } from 'react-native'
 
-export const ModalContent = ({ visible, onClose, children }) => {
+export const ModalContent = ({ visible, onClose }) => {
   return (
     <Modal
       animationType="slide"
@@ -9,7 +9,7 @@ export const ModalContent = ({ visible, onClose, children }) => {
       visible={visible}
       onRequestClose={onClose}
     >
-      {children}
+      <Text>Hello</Text>
       <Button
         onPress={onClose}
         title="Close modal"

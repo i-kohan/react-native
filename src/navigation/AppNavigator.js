@@ -1,30 +1,39 @@
 import React from 'react'
-import { Scene, Router } from 'react-native-router-flux'
+import { Scene, Router, Modal, Lightbox } from 'react-native-router-flux'
 
 import * as Routes from '../scenes'
 
 const RouterComponent = () => (
   <Router>
-    <Scene
-      key="root"
-      tabs
-      tabBarStyle={{ backgroundColor: '#FFFFFF' }}
-    >
+    <Scene key="root">
       <Scene
-        key="home" 
-        title="Home"
-        component={Routes.HomeScene}
-        showLabel={false}
+        key="tabbar"
         hideNavBar
-        // transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}
-      />
+        tabs
+        tabBarStyle={{ backgroundColor: '#FFFFFF' }}
+      >
+        <Scene key="home" title="Training Day">
+          <Scene
+            key="traingingPage"
+            component={Routes.HomeScene}
+            title="Training day"
+            hideNavBar />
+        </Scene>
+        <Scene key="programs" title="Programs" initial>
+          <Scene
+            key="programs"
+            title="Programs"
+            hideNavBar
+            initial
+            component={Routes.ProgramsScene} />
+        </Scene>
+      </Scene>
       <Scene
-        key="profile"
-        title="Profile"
-        component={Routes.ProfileScene}
-        showLabel={false}
-        hideNavBar
-      />
+        modal
+        key="program"
+        component={Routes.ProgramScene}
+        title="Program"
+        direction="verical" />
     </Scene>
   </Router>
 );

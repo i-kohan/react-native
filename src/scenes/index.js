@@ -1,2 +1,2 @@
 export { HomeScene } from './Home'
-export { ProfileScene } from './Profile'
+export { ProgramsScene, ProgramScene } from './Programs'
