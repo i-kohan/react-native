@@ -14,5 +14,11 @@ export default styles = StyleSheet.create({
   },
   noDataMessage: {
     fontSize: 20,
+  },
+    icons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 50,
+    justifyContent: 'flex-end'
   }
 })

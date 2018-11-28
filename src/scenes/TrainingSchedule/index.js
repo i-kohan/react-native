@@ -1,4 +1,4 @@
-export { HomeScene } from './Home'
+export { TrainingScheduleScene } from './TrainingSchedule'
 export {
   actions,
   epics,

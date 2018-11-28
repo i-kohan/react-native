@@ -25,14 +25,9 @@ class Programs extends React.Component {
   componentDidMount() {
     this.props.init()
   }
-  // Actions.refresh({ renderRightButton: this.renderRightButton })
-
-  // renderRightButton = () => (
-  //   <Icon name='list-ul' type='font-awesome' onPress={() => console.log} />
-  // )
 
   routeToProgram = (program) => () => {
-    Actions.program({ program, title: program.title })
+    Actions.Pprogram({ program, title: program.title })
   }
 
   render() {

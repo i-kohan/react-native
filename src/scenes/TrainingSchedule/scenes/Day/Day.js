@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, ActivityIndicator } from 'react-native'
+import { Icon } from 'react-native-elements'
+import { Actions } from 'react-native-router-flux'
 
-import { CalendarHeader, TrainingDay, ModalContent } from './components'
+import { CalendarHeader } from './components'
 import { ProgramsList } from '../../../../components';
 
 
 import { getCurrentDate, getLoading, getDaySchedule, getModalVisibility } from './redux/selectors'
-
 import { dayChange, init, openModal, closeModal } from './redux/actions'
-import { Actions } from 'react-native-router-flux'
 
 
 import styles from './styles'
@@ -32,8 +32,18 @@ class Day extends React.PureComponent {
   }
 
   routeToProgram = (program) => () => {
-    Actions.program({ program, title: program.title })
+    Actions.TSprogram({ program, title: program.title })
   }
+
+  renderIcons = (id) => (
+    <Icon
+      iconStyle={{marginRight: 20}}
+      size={20}
+      name='trash'
+      type='font-awesome'
+      onPress={() => console.log(id)}
+    />
+  ) 
 
   render() {
     const {
@@ -41,7 +51,6 @@ class Day extends React.PureComponent {
       currentDate,
       loading,
       daySchedule,
-      isModalVisible
     } = this.props
     return (
       <View style={styles.containter}>
@@ -53,6 +62,7 @@ class Day extends React.PureComponent {
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
           <ProgramsList
+            renderIcons={this.renderIcons}
             options={daySchedule}
             onClick={this.routeToProgram}
           />

@@ -29,11 +29,4 @@ export default styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderBottomWidth: 1,
   },
-  assignButton: {
-    marginTop: 32,
-  },
-  dialogText: {
-    width: '100%',
-    height: '100%'
-  }
 })

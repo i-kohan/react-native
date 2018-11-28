@@ -1,1 +1,0 @@
-export { ProgramDescriptionScene } from './ProgramDescription'

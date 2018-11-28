@@ -5,7 +5,7 @@ import { DayScene } from './scenes'
 
 import styles from './styles'
 
-class Home extends React.Component {
+class TrainingSchedule extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -14,4 +14,4 @@ class Home extends React.Component {
     )
   }
 }
-export const HomeScene = Home
+export const TrainingScheduleScene = TrainingSchedule

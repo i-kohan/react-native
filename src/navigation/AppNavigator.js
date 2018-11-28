@@ -21,33 +21,45 @@ const RouterComponent = () => (
         tabs
         tabBarStyle={styles.tabBarStyle}
       >
-        <Scene
-          key="home"
-          title="Training Day"
-          icon={TabIcon('calendar')}
-          tabBarLabel=''>
+        <Scene key="home" icon={TabIcon('calendar')} title="Training Shedule">
           <Scene
             rightButtonIconStyle={{width: 50, height: 50}}
             rightButtonImage={{uri: "https://cdn1.iconfinder.com/data/icons/flat-and-simple-part-1/128/plus_round-512.png"}}
-            onRight={({ navigation }) => { /*navigation.state.params*/ return null }}
+            onRight={({ navigation }) => navigation.state.params.addProgram()}
             key="traingingPage"
-            component={Routes.HomeScene}
-            title="Training day" />
+            component={Routes.TrainingScheduleScene}
+            title="Training day"
+          />
         </Scene>
-        <Scene key="programs" title="Programs" initial icon={TabIcon('list-ul')}>
+        <Scene initial key="programs" icon={TabIcon('list-ul')} title="Programs" >
           <Scene
+            rightButtonIconStyle={{width: 50, height: 50}}
+            rightButtonImage={{uri: "https://cdn1.iconfinder.com/data/icons/flat-and-simple-part-1/128/plus_round-512.png"}}
+            onRight={({ navigation }) => navigation.state.params.addProgram()}
             key="programs"
             title="Training programs"
             initial
-            component={Routes.ProgramsScene} />
+            component={Routes.ProgramsScene}
+          />
         </Scene>
       </Scene>
       <Scene
         modal
-        key="program"
+        rightButtonIconStyle={{width: 40, height: 40}}
+        rightButtonImage={{uri: "https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2016/10/assign.png"}}
+        onRight={({ navigation }) => navigation.state.params.addProgram()}
+        key="Pprogram"
         component={Routes.ProgramScene}
         title="Program"
-        direction="verical" />
+        direction="verical"
+      />
+      <Scene
+        modal
+        key="TSprogram"
+        component={Routes.ProgramScene}
+        title="Program"
+        direction="verical"
+      />
     </Scene>
   </Router>
 );
