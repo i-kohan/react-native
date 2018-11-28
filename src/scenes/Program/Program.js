@@ -48,7 +48,6 @@ class Program extends React.Component {
     const { selectedDay } = this.state
     return (
       <View>
-        <Text style={styles.descriptionItem}>Choose a day</Text>
         <Picker
           selectedValue={selectedDay}
           style={styles.picker}
@@ -76,6 +75,7 @@ class Program extends React.Component {
       <View>
         <DialogComponent
           visible={dialogVisible}
+          title="Choose a day"
           onClose={this.closeDayDialog}
           renderContent={this.renderDayPicker}
           width={300}
