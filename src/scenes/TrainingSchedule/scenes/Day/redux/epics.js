@@ -1,8 +1,7 @@
 import { filter, switchMap, map, mergeMap } from 'rxjs/operators'
 import { INIT, DAY_CHANGE, FETCHING } from './types'
 import { initSuccess, dayChanged, fetch, fetchSuccess } from './actions'
-import { getPrograms } from '../../../../../asyncStorage/getProgram'
-import { getData } from '../api/api'
+import { getPrograms } from '../../../../../asyncStorage/programs'
 import moment from 'moment'
 
 // TODO: replace to utils

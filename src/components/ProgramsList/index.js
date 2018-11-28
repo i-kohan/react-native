@@ -25,7 +25,7 @@ const renderItem = ({ onClick, renderIcons }) => ({ item }) => (
 )
 
 const ProgramsListComponent = ({ options, onClick, renderIcons }) => {
-  if (!options) {
+  if (!options || !options.length) {
     return (
       <View style={styles.noDataView}>
         <Text style={styles.noDataMessage}>No Programs</Text>

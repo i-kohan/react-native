@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import { List, DialogComponent, ProgramDescription } from '../../components'
 import { PICKER_OPTIONS } from './constants' 
 
-import { setProgramThatDay } from '../../asyncStorage/setProgram'
+import { setProgramToSchedule } from '../../asyncStorage/programs'
 import styles from './styles'
 
 
@@ -15,13 +15,7 @@ class Program extends React.Component {
 
   state = {
     selectedDay: moment().format('dddd'),
-    dialog: {
-      title: '',
-      visible: false,
-      loading: false,
-      success: false,
-      failure: false
-    }
+    dialogVisible: false,
   }
 
   componentDidMount() {
@@ -29,54 +23,28 @@ class Program extends React.Component {
   }
 
   openDayDialog = () => {
-    this.setState( state => ({ dialog: { ...state.dialog, visible: true, title: 'Choose day to add' } }))
+    this.setState({ dialogVisible: true })
   }
   
   closeDayDialog = () => {
-    this.setState( state => ({ dialog: { ...state.dialog, visible: false } }))
+    this.setState({ dialogVisible: false })
   }
 
-  addToDay = async () => {
+  addToDay = (setDialogState) => async () => {
     const { program } = this.props
     const { selectedDay } = this.state
-    this.setState((state) => ({ dialog: { ...state.dialog, loading: true, title: 'Loading' } }))
+    setDialogState({ loading: true, title: 'Loading' })
     try {
-      await setProgramThatDay(program, selectedDay)
-      this.setState((state) => ({ dialog: { ...state.dialog, success: true, title: 'Loaded successfully' } }))
+      await setProgramToSchedule(program, selectedDay)
+      setDialogState({ success: true, title: 'Loaded successfully' })
     } catch (err) {
-      this.setState((state) => ({ dialog: { ...state.dialog, failure: true, title: 'Loading failed' } }))
+      setDialogState({ failure: true, title: 'Loading failed' })
     }
   } 
 
   handleDayChange = (selectedDay) => this.setState({ selectedDay })
 
-  renderSuccess = () => (
-    <View>
-      <Text>Succes</Text>
-      <Button title="Ok" onPress={this.closeDayDialog} />
-    </View>
-  )
-
-  renderFailure = () => (
-    <View>
-      <Text>FAILURE</Text>
-      <Button title="Ok" onPress={this.closeDayDialog} />
-    </View>
-  )
-
-  renderLoading = () => (
-    <ActivityIndicator size="large" color="0000ff" style={{alignSelf: 'center'}} />
-  )
-
-  getRenderFunc = ({ loading, success, failure }) => {
-    let renderFn = this.renderDayPicker
-    if (loading) renderFn = this.renderLoading
-    if (success) renderFn = this.renderSuccess
-    if (failure) renderFn = this.renderFailure
-    return renderFn
-  }
-
-  renderDayPicker = () => {
+  renderDayPicker = (setDialogState) => () => {
     const { selectedDay } = this.state
     return (
       <View>
@@ -90,32 +58,29 @@ class Program extends React.Component {
             <Picker.Item key={opt.id} label={opt.lable} value={opt.value} />
           ))}
         </Picker>
-        <Button title='Set' onPress={this.addToDay}/>
+        <Button title='Set' onPress={this.addToDay(setDialogState)}/>
       </View>
     )
   }
 
   render() {
     const {
-      dialog
+      dialogVisible
     } = this.state
 
     const {
       program,
     } = this.props
 
-    const renderDialogContentFn = this.getRenderFunc(dialog)
     return (
       <View>
         <DialogComponent
-          visible={dialog.visible}
-          title={dialog.title}
+          visible={dialogVisible}
           onClose={this.closeDayDialog}
+          renderContent={this.renderDayPicker}
           width={300}
           height={300}
-        >
-          {renderDialogContentFn()}
-        </DialogComponent>
+        />
         <ProgramDescription program={program} />
       </View>
     )

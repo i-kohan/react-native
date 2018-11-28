@@ -6,4 +6,9 @@ export default styles = StyleSheet.create({
     flexDirection: 'column',
     alignSelf: 'flex-start',
   },
+  confirmButtons: {
+    flexDirection: "row",
+    marginTop: 'auto',
+    alignSelf: 'flex-end'
+  }
 })
