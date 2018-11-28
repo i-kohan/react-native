@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 import { View, Text, ActivityIndicator } from 'react-native'
 
 import { CalendarHeader, TrainingDay, ModalContent } from './components'
+import { ProgramsList } from '../../../../components';
+
 
 import { getCurrentDate, getLoading, getDaySchedule, getModalVisibility } from './redux/selectors'
 
 import { dayChange, init, openModal, closeModal } from './redux/actions'
+import { Actions } from 'react-native-router-flux'
 
 
 import styles from './styles'
@@ -15,14 +18,11 @@ const mapStateToProps = state => ({
   currentDate: getCurrentDate(state),
   loading: getLoading(state),
   daySchedule: getDaySchedule(state),
-  isModalVisible: getModalVisibility(state) 
 })
 
 const mapDispatchToProps = dispatch => ({
   init: () => dispatch(init),
   onDayChange: (days) => dispatch(dayChange(days)),
-  openModal: (id) => dispatch(openModal(id)),
-  closeModal: () => dispatch(closeModal)
 })
 
 class Day extends React.PureComponent {
@@ -31,10 +31,12 @@ class Day extends React.PureComponent {
     this.props.init()
   }
 
+  routeToProgram = (program) => () => {
+    Actions.program({ program, title: program.title })
+  }
+
   render() {
     const {
-      openModal,
-      closeModal,
       onDayChange,
       currentDate,
       loading,
@@ -50,15 +52,11 @@ class Day extends React.PureComponent {
         {loading ? (
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
-          <TrainingDay
-            openModal={openModal}
-            day={daySchedule}
+          <ProgramsList
+            options={daySchedule}
+            onClick={this.routeToProgram}
           />
         )}
-        <ModalContent
-          visible={isModalVisible}
-          onClose={closeModal}  
-        />
       </View>
     )
   }

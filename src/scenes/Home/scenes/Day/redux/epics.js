@@ -1,6 +1,7 @@
 import { filter, switchMap, map, mergeMap } from 'rxjs/operators'
 import { INIT, DAY_CHANGE, FETCHING } from './types'
 import { initSuccess, dayChanged, fetch, fetchSuccess } from './actions'
+import { getPrograms } from '../../../../../asyncStorage/getProgram'
 import { getData } from '../api/api'
 import moment from 'moment'
 
@@ -9,7 +10,7 @@ const getDayOfWeek = (date) => moment(date).format('dddd')
 
 export const initEpic = (action$, state$) => action$.pipe(
   filter(action => action.type === INIT),
-  switchMap(() => getData(getDayOfWeek(state$.value.home.day.currentDate))),
+  switchMap(() => getPrograms(getDayOfWeek(state$.value.home.day.currentDate))),
   map(initSuccess)
 )
   
@@ -28,6 +29,6 @@ export const changeDayEpic = (action$, state$) => action$.pipe(
 
 export const fetchDayEpic = (action$) => action$.pipe(
   filter(action => action.type === FETCHING),
-  switchMap(({ payload }) => getData(payload)),
+  switchMap(({ payload }) => getPrograms(payload)),
   map(fetchSuccess)
 )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, StatusBar } from 'react-native'
 import { Scene, Router, Modal, Lightbox } from 'react-native-router-flux'
 import { Icon } from 'react-native-elements'
 
@@ -8,9 +8,8 @@ import * as Routes from '../scenes'
 import styles from './styles'
 
 const TabIcon = (name) => ({ focused }) => (
-  <Icon name={name} type='font-awesome' color={focused ? 'red' : 'black'}/>
+  <Icon name={name} type='font-awesome' color={focused ? 'green' : 'black'}/>
 )
-
 
 const RouterComponent = () => (
   <Router>
@@ -30,7 +29,7 @@ const RouterComponent = () => (
           <Scene
             rightButtonIconStyle={{width: 50, height: 50}}
             rightButtonImage={{uri: "https://cdn1.iconfinder.com/data/icons/flat-and-simple-part-1/128/plus_round-512.png"}}
-            onRight={({ navigation }) => console.log(navigation.state.params)}
+            onRight={({ navigation }) => { /*navigation.state.params*/ return null }}
             key="traingingPage"
             component={Routes.HomeScene}
             title="Training day" />

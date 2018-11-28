@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, ActivityIndicator, Button } from 'react-native'
+import { View, Text, Image, ActivityIndicator, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getPrograms, getLoading } from './redux/selectors'
@@ -24,7 +24,6 @@ class Programs extends React.Component {
 
   componentDidMount() {
     this.props.init()
-    console.log(this.props)
   }
   // Actions.refresh({ renderRightButton: this.renderRightButton })
 

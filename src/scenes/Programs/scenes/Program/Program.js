@@ -1,21 +1,48 @@
 import React from 'react'
-import { View, Text, Image, ActivityIndicator, ScrollView, AsyncStorage } from 'react-native'
+import moment from 'moment'
+import { View, Text, Image, Picker, ScrollView, Alert, Button, ActivityIndicator } from 'react-native'
 
-import { List } from '../../../../components'
+import { List, DialogComponent } from '../../../../components'
+import { PICKER_OPTIONS } from './constants' 
 
 import { setProgramThatDay } from '../../../../asyncStorage/setProgram'
 import styles from './styles'
-import { Button } from 'react-native';
+
+
 
 class Program extends React.Component {
 
   state = {
-    selectedExercise: ''
+    selectedDay: moment().format('dddd'),
+    selectedExercise: '',
+    dialog: {
+      title: '',
+      visible: false,
+      loading: false,
+      success: false,
+      failure: false
+    }
+  }
+
+
+  openDayDialog = () => {
+    this.setState( state => ({ dialog: { ...state.dialog, visible: true, title: 'Choose day to add' } }))
+  }
+  
+  closeDayDialog = () => {
+    this.setState( state => ({ dialog: { ...state.dialog, visible: false } }))
   }
 
   addToDay = async () => {
-    const selected = this.state.selectedExercise
-    setProgramThatDay(selected)
+    const { program } = this.props
+    const { selectedDay } = this.state
+    this.setState((state) => ({ dialog: { ...state.dialog, loading: true, title: 'Loading' } }))
+    try {
+      await setProgramThatDay(program, selectedDay)
+      this.setState((state) => ({ dialog: { ...state.dialog, success: true, title: 'Loaded successfully' } }))
+    } catch (err) {
+      this.setState((state) => ({ dialog: { ...state.dialog, failure: true, title: 'Loading failed' } }))
+    }
   } 
 
   onSelectExercise = (id) => {
@@ -24,8 +51,54 @@ class Program extends React.Component {
     this.setState({ selectedExercise })
   }
 
+  handleDayChange = (selectedDay) => this.setState({ selectedDay })
+
+  renderSuccess = () => (
+    <View>
+      <Text>Succes</Text>
+      <Button title="Ok" onPress={this.closeDayDialog} />
+    </View>
+  )
+
+  renderFailure = () => (
+    <View>
+      <Text>FAILURE</Text>
+      <Button title="Ok" onPress={this.closeDayDialog} />
+    </View>
+  )
+
+  renderLoading = () => (
+    <ActivityIndicator size="large" color="0000ff" style={{alignSelf: 'center'}} />
+  )
+
+  getRenderFunc = ({ loading, success, failure }) => {
+    let renderFn = this.renderDayPicker
+    if (loading) renderFn = this.renderLoading
+    if (success) renderFn = this.renderSuccess
+    if (failure) renderFn = this.renderFailure
+    return renderFn
+  }
+
+  renderDayPicker = () => {
+    const { selectedDay } = this.state
+    return (
+      <View>
+        <Text style={styles.descriptionItem}>Choose a day</Text>
+        <Picker
+          selectedValue={selectedDay}
+          style={{ height: 150, width: 250 }}
+          onValueChange={this.handleDayChange}
+        >
+          {PICKER_OPTIONS.map(opt => (
+            <Picker.Item key={opt.id} label={opt.lable} value={opt.value} />
+          ))}
+        </Picker>
+        <Button title='Set' onPress={this.addToDay}/>
+      </View>
+    )
+  }
+
   renderCollapsibleArea = (item) => {
-    console.log(item.imageURL)
     return (
       <View>
         <View style={styles.areaItem}>
@@ -43,14 +116,30 @@ class Program extends React.Component {
   }
 
   render() {
-    const { selectedExercise } = this.state
+    const {
+      selectedExercise,
+      dialog
+    } = this.state
+
     const {
       exercises,
-      name,
       description
     } = this.props.program
+
+    const renderDialogContentFn = this.getRenderFunc(dialog)
+
     return (
       <ScrollView>
+        <DialogComponent
+          visible={dialog.visible}
+          title={dialog.title}
+          onClose={this.closeDayDialog}
+          // actions={[{ text: 'Close', onPress: () => console.log('hello') }]}
+          width={300}
+          height={300}
+        >
+          {renderDialogContentFn()}
+        </DialogComponent>
         <Text style={styles.descriptionProgramTitle}>Description of program:</Text>
         <Text style={styles.descriptionProgram}>{description}</Text>
         <List
@@ -62,7 +151,7 @@ class Program extends React.Component {
         <View style={styles.assignButton}>
           <Button
             title="Assign this program to shedule"
-            onPress={this.addToDay}
+            onPress={this.openDayDialog}
           />
         </View>
       </ScrollView>

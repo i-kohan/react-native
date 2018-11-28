@@ -31,5 +31,9 @@ export default styles = StyleSheet.create({
   },
   assignButton: {
     marginTop: 32,
+  },
+  dialogText: {
+    width: '100%',
+    height: '100%'
   }
 })
