@@ -1,4 +1,5 @@
 export { ProgramsScene } from './Programs'
+export { ProgramScene } from './scenes'
 export {
   actions,
   epics,

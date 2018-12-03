@@ -4,15 +4,7 @@ import Dialog, { DialogContent, DialogTitle, DialogButton } from 'react-native-p
 
 import styles from './styles'
 
-export class DialogComponent extends React.Component{
-
-  state = {
-    loading: false,
-    success: false,
-    failure: false,
-    title: ''
-  }
-
+export default class DialogComponent extends React.Component{
   renderSuccess = () => (
     <View>
       <Text>Succes</Text>
@@ -51,16 +43,19 @@ export class DialogComponent extends React.Component{
       title,
       children,
       renderContent,
+      loading,
+      success,
+      failure,
       ...props
     } = this.props
 
-    const renderFn = this.getRenderFunc(this.state, renderContent)
+    const renderFn = this.getRenderFunc({ loading, success, failure }, renderContent)
 
     return (
       <Dialog
         visible={visible}
         onTouchOutside={onClose}
-        dialogTitle={<DialogTitle title={this.state.title || title} />}
+        dialogTitle={<DialogTitle title={title} />}
         actions={actions ? actions.map(act => (
           <DialogButton {...act}/>
         )): []}

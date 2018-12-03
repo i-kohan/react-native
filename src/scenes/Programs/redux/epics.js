@@ -1,11 +1,20 @@
-import { filter, switchMap,map } from 'rxjs/operators'
+import { filter, switchMap,map, catchError } from 'rxjs/operators'
 
-import { INIT } from './types'
-import { initSuccess } from './actions'
+import * as types from './types'
+import * as actions from './actions'
 import { getData } from '../../../api/programs'
 
-export const initEpic = (action$, state$) => action$.pipe(
-  filter(action => action.type === INIT),
-  switchMap(() => getData()),
-  map(initSuccess)
-) 
+import { setProgramToSchedule } from '../../../asyncStorage/programs'
+
+export const initEpic = (action$, state$) => action$.ofType(types.INIT)
+  .pipe(
+    switchMap(() => getData()),
+    map(actions.initSuccess)
+  )
+
+export const assignEpic = (action$) => action$.ofType(types.ASSIGN_PROGRAM)
+  .pipe(
+    switchMap(({ payload: { program, day } }) => setProgramToSchedule(program, day)),
+    map(() => actions.assignSuccess),
+    catchError(actions.assignFailed)
+  )

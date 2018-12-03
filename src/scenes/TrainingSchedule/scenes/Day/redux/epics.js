@@ -1,7 +1,12 @@
-import { filter, switchMap, map, mergeMap } from 'rxjs/operators'
-import { INIT, DAY_CHANGE, FETCHING } from './types'
-import { initSuccess, dayChanged, fetch, fetchSuccess } from './actions'
-import { getPrograms } from '../../../../../asyncStorage/programs'
+import { filter, switchMap, map, mergeMap, catchError, endWith } from 'rxjs/operators'
+import {
+  INIT,
+  DAY_CHANGE,
+  FETCHING,
+  REMOVE_PROGRAM
+} from './types'
+import { initSuccess, init, dayChanged, fetch, fetchSuccess, dialogLoading,removeSuccess, removeFailed } from './actions'
+import { getPrograms, removeProgram } from '../../../../../asyncStorage/programs'
 import moment from 'moment'
 
 // TODO: replace to utils
@@ -31,3 +36,23 @@ export const fetchDayEpic = (action$) => action$.pipe(
   switchMap(({ payload }) => getPrograms(payload)),
   map(fetchSuccess)
 )
+
+export const removeProgramEpic = (action$) => action$.ofType(REMOVE_PROGRAM)
+  .pipe(
+    switchMap(({ payload }) => removeProgram(payload)),
+    mergeMap(() => {
+      console.log('SUCCESS')
+      return [
+        removeSuccess,
+        fetch()
+      ]}
+    ),
+    catchError(removeFailed),
+  )
+// action$.pipe(
+//   filter(action => action.type === REMOVE_PROGRAM),
+//   switchMap(({ payload }) => removeProgram(payload)),
+//   map(() => removeSuccess),
+//   startWith(dialogLoading),
+//   catchError(removeFailed),
+// )

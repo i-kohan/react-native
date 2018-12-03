@@ -1,4 +1,5 @@
 export { TrainingScheduleScene } from './TrainingSchedule'
+export { TSProgramScene } from './scenes'
 export {
   actions,
   epics,

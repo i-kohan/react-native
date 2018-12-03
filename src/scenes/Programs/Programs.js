@@ -54,7 +54,7 @@ class Programs extends React.Component {
         ) : (
           <List
             options={programs}
-            onClick={() => console.log('helo')}
+            onClick={() => null}
             noDataMessage={'No available programs'}
             renderIcons={this.renderIcons}
           />

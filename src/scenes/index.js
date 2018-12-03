@@ -1,3 +1,2 @@
-export { TrainingScheduleScene } from './TrainingSchedule'
-export { ProgramsScene } from './Programs'
-export { ProgramScene } from './Program'
+export { TrainingScheduleScene, TSProgramScene } from './TrainingSchedule'
+export { ProgramsScene, ProgramScene } from './Programs'

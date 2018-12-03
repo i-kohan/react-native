@@ -9,8 +9,8 @@ import { DialogComponent, List, TouchableIcon } from '../../../../components'
 
 import { removeProgram } from '../../../../asyncStorage/programs'
 
-import { getCurrentDate, getLoading, getDaySchedule, getModalVisibility } from './redux/selectors'
-import { dayChange, init, openModal, closeModal } from './redux/actions'
+import { getCurrentDate, getLoading, getDaySchedule, getDialogState, getSelectedProgram } from './redux/selectors'
+import { dayChange, init, removeProgramAct, dialogOpen, dialogClose, selectProgram, dialogLoading } from './redux/actions'
 
 import styles from './styles'
 
@@ -18,23 +18,28 @@ const mapStateToProps = state => ({
   currentDate: getCurrentDate(state),
   loading: getLoading(state),
   daySchedule: getDaySchedule(state),
+  dialogState: getDialogState(state),
+  selectedProgram: getSelectedProgram(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   init: () => dispatch(init),
   onDayChange: (days) => dispatch(dayChange(days)),
+  removeProgram: (id) => dispatch(removeProgramAct(id)),
+  dialogOpen: () => dispatch(dialogOpen),
+  dialogClose: () => dispatch(dialogClose),
+  dialogLoading: () => dispatch(dialogLoading),
+  selectProgram: (id) => dispatch(selectProgram(id))
 })
 
 class Day extends React.PureComponent {
 
   state = {
     programIdRemove: '',
-    dialogVisible: false
   }
 
   componentDidMount() {
     this.props.init()
-    console.log('mount')
   }
 
   openDayDialog = (id) => () => {
@@ -45,24 +50,22 @@ class Day extends React.PureComponent {
     this.setState({ dialogVisible: false })
   }
 
-  removeProgram = (setDialogState) => async () => {
-    const { currentDate } = this.props
-    const { programIdRemove } = this.state
-    setDialogState({ loading: true, title: 'Loading' })
-    try {
-      await removeProgram(programIdRemove, currentDate.format('dddd'))
-      setDialogState({ success: true, title: 'Removed successfully' })
-    } catch (err) {
-      setDialogState({ failure: true, title: 'Removing failed' })
-    }
-  } 
+  removeProgram = () => {
+    this.props.dialogLoading()
+    this.props.removeProgram(this.props.selectedProgram)
+  }
 
-  renderConfirm = (setDialogState) => () => (
+  openDialog = (id) => () => {
+    this.props.selectProgram(id)
+    this.props.dialogOpen()
+  }
+
+  renderConfirm = () => () => (
     <View style={styles.confirmButtons}>
       <View style={{marginRight: 8}} >
-        <Button title='Yes' onPress={this.removeProgram(setDialogState)} />
+        <Button title='Yes' onPress={this.removeProgram} />
       </View>
-      <Button title='No' onPress={this.closeDayDialog}/>
+      <Button title='No' onPress={this.props.dialogClose}/>
     </View>
   )
 
@@ -76,7 +79,7 @@ class Day extends React.PureComponent {
         style={styles.iconRemove}
         iconSize={25}
         iconName='trash'
-        onClick={this.openDayDialog(item.id)}
+        onClick={this.openDialog(item.id)}
       />
       <TouchableIcon
         style={styles.iconGoTo}
@@ -89,22 +92,22 @@ class Day extends React.PureComponent {
 
   render() {
     const {
-      dialogVisible
-    } = this.state
-
-    const {
       onDayChange,
       currentDate,
       loading,
       daySchedule,
+      dialogState
     } = this.props
 
     return (
       <View style={styles.containter}>
         <DialogComponent
-          title="Do you want to remove program?"
-          visible={dialogVisible}
-          onClose={this.closeDayDialog}
+          loading={dialogState.loading}
+          title={dialogState.title}
+          success={dialogState.success}
+          failure={dialogState.failure}
+          visible={dialogState.isVisible}
+          onClose={this.props.dialogClose}
           renderContent={this.renderConfirm}
           width={300}
           height={300}

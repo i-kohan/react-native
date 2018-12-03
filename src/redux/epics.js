@@ -6,5 +6,7 @@ export default combineEpics(
   trainingScheduleEpics.dayEpics.changeDayEpic,
   trainingScheduleEpics.dayEpics.initEpic,
   trainingScheduleEpics.dayEpics.fetchDayEpic,
-  programsEpics.initEpic
+  trainingScheduleEpics.dayEpics.removeProgramEpic,
+  programsEpics.initEpic,
+  programsEpics.assignEpic
 )
