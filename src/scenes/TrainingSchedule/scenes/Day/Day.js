@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
 import { CalendarHeader } from './components'
-import { ProgramsList, DialogComponent } from '../../../../components'
+import { DialogComponent, List, TouchableIcon } from '../../../../components'
 
 import { removeProgram } from '../../../../asyncStorage/programs'
 
@@ -34,6 +34,7 @@ class Day extends React.PureComponent {
 
   componentDidMount() {
     this.props.init()
+    console.log('mount')
   }
 
   openDayDialog = (id) => () => {
@@ -69,14 +70,21 @@ class Day extends React.PureComponent {
     Actions.TSprogram({ program, title: program.title })
   }
 
-  renderIcons = (id) => (
-    <Icon
-      iconStyle={{marginRight: 20}}
-      size={20}
-      name='trash'
-      type='font-awesome'
-      onPress={this.openDayDialog(id)}
-    />
+  renderIcons = (item) => (
+    <View style={styles.icons}>
+      <TouchableIcon
+        style={styles.iconRemove}
+        iconSize={25}
+        iconName='trash'
+        onClick={this.openDayDialog(item.id)}
+      />
+      <TouchableIcon
+        style={styles.iconGoTo}
+        iconSize={15}
+        iconName='chevron-right'
+        onClick={this.routeToProgram(item)}
+      />
+    </View>
   ) 
 
   render() {
@@ -108,7 +116,8 @@ class Day extends React.PureComponent {
         {loading ? (
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
-          <ProgramsList
+          <List
+            noDataMessage="No specified programs"
             renderIcons={this.renderIcons}
             options={daySchedule}
             onClick={this.routeToProgram}

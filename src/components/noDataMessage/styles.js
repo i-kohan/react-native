@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export default styles = StyleSheet.create({
-  list: {
-    width: '100%',
-    marginBottom: 100
-  },
+export default StyleSheet.create({
   noDataView: {
     height: 50,
     margin: 8,
@@ -15,10 +11,4 @@ export default styles = StyleSheet.create({
   noDataMessage: {
     fontSize: 20,
   },
-  icons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: '100%',
-  }
 })

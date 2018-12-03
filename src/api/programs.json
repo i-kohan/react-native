@@ -3,17 +3,20 @@
     "id": "1",
     "name": "legs",
     "title": "Program of legs trainig",
+    "imageURL": "assets:/programs/leg-day.png",
     "description": "Программа расчитана на прокачку ног, очень полезные упражнения, которые помогут за месяц привести ваши ноги в порядок!",
     "exercises": [
       {
         "id": "1",
         "title": "Поднимание сидя",
+        "icon": "http://steelsports.ru/wp-content/uploads/2014/09/56.jpg",
         "imageURL": "https://media1.tenor.com/images/692ba1d736d2972e39a42020bd6f525b/tenor.gif",
         "description": "Очень полезное упражнение для ваших ног, используйте гифку ниже, чтобы узнать, как правильно выполнять упражнение"
       },
       {
         "id": "2",
         "title": "Развод ног",
+        "icon": "http://steelsports.ru/wp-content/uploads/2014/09/56.jpg",
         "imageURL": "https://media1.tenor.com/images/db65b2a4ee43d1205a89f76945d81de3/tenor.gif",
         "description": "Lhlkdhjslfkjadhs ljs dhfs foasd hfsf oiasdhf pasduhfpoasd hfasdf hjpasdfhas"
       }

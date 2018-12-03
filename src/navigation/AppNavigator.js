@@ -45,6 +45,7 @@ const RouterComponent = () => (
       </Scene>
       <Scene
         modal
+        hideNavBar
         rightButtonIconStyle={{width: 40, height: 40}}
         rightButtonImage={{uri: "https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2016/10/assign.png"}}
         onRight={({ navigation }) => navigation.state.params.addProgram()}

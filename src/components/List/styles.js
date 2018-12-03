@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native'
 
-export default styles = StyleSheet.create({
+export default StyleSheet.create({
+  item: {
+    flex: 1
+  },
   icons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: 30,
-    justifyContent: 'space-between'
+    height: 30,
+    width: '100%',
+    backgroundColor: 'black'
   }
 })

@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, Image, ActivityIndicator, StatusBar } from 'react-native'
+import { View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getPrograms, getLoading } from './redux/selectors'
 import { init } from './redux/actions'
 
-import { ProgramsList, Modal } from '../../components'
+import { List, TouchableIcon } from '../../components'
 import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
@@ -30,6 +30,17 @@ class Programs extends React.Component {
     Actions.Pprogram({ program, title: program.title })
   }
 
+  renderIcons = (item) => () => (
+    <View style={styles.icons}>
+      <TouchableIcon
+        style={styles.iconGoTo}
+        iconSize={15}
+        iconName='chevron-right'
+        onClick={this.routeToProgram(item)}
+      />
+    </View>
+  )
+
   render() {
     const {
       programs,
@@ -41,7 +52,12 @@ class Programs extends React.Component {
         {loading ? (
           <ActivityIndicator size="large" color="0000ff" />
         ) : (
-          <ProgramsList options={programs} onClick={this.routeToProgram}/>
+          <List
+            options={programs}
+            onClick={() => console.log('helo')}
+            noDataMessage={'No available programs'}
+            renderIcons={this.renderIcons}
+          />
         )}
       </View>
     )
