@@ -36,7 +36,6 @@ const removeItem = (items, itemIdToRemove) => {
 export const getPrograms = async (day = moment().format('dddd')) => {
   try {
     const storageItems = await AsyncStorage.getItem(`${STORE_KEY}:${day}`)
-    console.log(JSON.parse(storageItems))
     return JSON.parse(storageItems)
   } catch (err) {
     throw new Error(err)
@@ -66,7 +65,6 @@ export const removeProgram = async (programId, day = moment().format('dddd')) =>
     const storageItems = await AsyncStorage.getItem(`${STORE_KEY}:${day}`)
     const parsedItems = JSON.parse(storageItems)
     const newItems = removeItem(parsedItems, programId)
-    console.log(newItems, 'new Items')
     await timeout()
     return await AsyncStorage.setItem(`${STORE_KEY}:${day}`, JSON.stringify(newItems))
   } catch (err) {

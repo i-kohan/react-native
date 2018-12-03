@@ -40,12 +40,10 @@ export const fetchDayEpic = (action$) => action$.pipe(
 export const removeProgramEpic = (action$) => action$.ofType(REMOVE_PROGRAM)
   .pipe(
     switchMap(({ payload }) => removeProgram(payload)),
-    mergeMap(() => {
-      console.log('SUCCESS')
-      return [
+    mergeMap(() => [
+        fetch(),
         removeSuccess,
-        fetch()
-      ]}
+      ]
     ),
     catchError(removeFailed),
   )

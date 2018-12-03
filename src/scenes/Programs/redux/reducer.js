@@ -22,7 +22,7 @@ export default reducer = (state = initialState, action) => {
     case types.INIT_SUCCESS:
       return { ...state, ...payload, loading: false }
     case types.DIALOG_OPEN:
-      return { ...state, dialogState: { ...state.dialogState, isVisible: true, title: 'Remove program' } }
+      return { ...state, dialogState: { ...state.dialogState, isVisible: true, title: 'Assign program' } }
     case types.DIALOG_LOADING:
       return { ...state, dialogState: { ...state.dialogState, loading: true, title: 'Loading' }}
     case types.ASSIGN_SUCCESS:

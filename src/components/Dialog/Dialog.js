@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, ActivityIndicator, Text, Button } from 'react-native'
-import Dialog, { DialogContent, DialogTitle, DialogButton } from 'react-native-popup-dialog'
+import Dialog, { DialogContent, DialogTitle, DialogButton, SlideAnimation } from 'react-native-popup-dialog'
 
 import styles from './styles'
 
 export default class DialogComponent extends React.Component{
   renderSuccess = () => (
     <View>
-      <Text>Succes</Text>
+      <Text>Success</Text>
       <Button title="Ok" onPress={this.props.onClose} />
     </View>
   )
@@ -53,7 +53,9 @@ export default class DialogComponent extends React.Component{
 
     return (
       <Dialog
+        animationDuration={0}
         visible={visible}
+        hasOverlay
         onTouchOutside={onClose}
         dialogTitle={<DialogTitle title={title} />}
         actions={actions ? actions.map(act => (
@@ -61,7 +63,7 @@ export default class DialogComponent extends React.Component{
         )): []}
         {...props}
       >
-        <DialogContent>
+        <DialogContent >
           <View style={styles.content}>
             {renderFn()}
           </View>
