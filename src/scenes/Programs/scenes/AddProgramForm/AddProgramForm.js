@@ -4,7 +4,7 @@ import t from 'tcomb-form-native'
 
 
 const Program = t.struct({
-  name: t.String,
+  title: t.String,
   description: t.String,
   imageURL: t.String
 })
@@ -14,16 +14,14 @@ const Form = t.form.Form
 class AddProgramForm extends React.Component {
 
   state = {
-    name: '',
+    title: '',
     description: '',
     imageURL: 'https://www.freeiconspng.com/uploads/-expander-fitness-trainer-fitness-room-gym-gymnastic-health-512-17.png'
   }
 
   handleSubmit = () => {
     const value = this._form.getValue();
-    if (value) {
-      console.log(value);
-    }
+    this.props.onSubmit(value)
   }
 
   render() {

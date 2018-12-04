@@ -25,11 +25,11 @@ export default reducer = (state = initialState, action) => {
     case types.DIALOG_OPEN:
       return { ...state, dialogState: { ...state.dialogState, isVisible: true, title: 'Assign program' } }
     case types.DIALOG_LOADING:
-      return { ...state, dialogState: { ...state.dialogState, loading: true, title: 'Loading' }}
-    case types.ASSIGN_SUCCESS:
-      return { ...state, dialogState: { ...state.dialogState, loading: false, success: true, title: 'Success' } }
-    case types.ASSIGN_FAILED:
-      return { ...state, dialogState: { ...dialogState, loading: false, failure: true, title: 'Failed' } }
+      return { ...state, dialogState: { ...state.dialogState, isVisible: true, loading: true, title: 'Loading' }}
+    case types.DIALOG_SUCCESS:
+      return { ...state, dialogState: { ...state.dialogState, isVisible: true, loading: false, success: true, title: 'Success' } }
+    case types.DIALOG_FAILURE:
+      return { ...state, dialogState: { ...dialogState, isVisible: true, loading: false, failure: true, title: 'Failed' } }
     case types.DIALOG_CLOSE:
       return { ...state, dialogState: { ...initialState.dialogState } }
     case types.SELECT_DAY:

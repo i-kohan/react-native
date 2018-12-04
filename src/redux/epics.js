@@ -8,5 +8,6 @@ export default combineEpics(
   trainingScheduleEpics.dayEpics.fetchDayEpic,
   trainingScheduleEpics.dayEpics.removeProgramEpic,
   programsEpics.initEpic,
-  programsEpics.assignEpic
+  programsEpics.assignEpic,
+  programsEpics.createProgramEpic
 )

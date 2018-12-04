@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import * as selectors from './redux/selectors'
 import * as actions from './redux/actions'
 
-import { List, TouchableIcon, ModalContent } from '../../components'
+import { List, TouchableIcon, ModalContent, DialogComponent } from '../../components'
 import { AddProgramForm } from './scenes'
 
 import styles from './styles'
@@ -14,13 +14,17 @@ import styles from './styles'
 const mapStateToProps = state => ({
   programs: selectors.getPrograms(state),
   loading: selectors.getLoading(state),
-  modalVisible: selectors.getModalVisibility(state)
+  modalVisible: selectors.getModalVisibility(state),
+  dialogState: selectors.getDialogState(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   init: () => dispatch(actions.init),
   modalClose: () => dispatch(actions.modalClose),
-  modalOpen: () => dispatch(actions.modalOpen)
+  modalOpen: () => dispatch(actions.modalOpen),
+  handleProgramCreate: (program) => dispatch(actions.createProgram(program)),
+  dialogClose: () => dispatch(actions.dialogClose),
+  dialogLoading: () => dispatch(actions.dialogLoading),
 })
 
 class Programs extends React.Component {
@@ -28,6 +32,12 @@ class Programs extends React.Component {
   componentDidMount() {
     this.props.init()
     this.props.navigation.setParams({ addProgram: this.props.modalOpen })
+  }
+
+  handleProgramCreate = (program) => {
+    this.props.modalClose()
+    this.props.dialogLoading()
+    this.props.handleProgramCreate(program)
   }
 
   routeToProgram = (program) => () => {
@@ -50,8 +60,12 @@ class Programs extends React.Component {
       programs,
       loading,
       modalVisible,
-      modalClose
+      modalClose,
+      dialogState,
+      dialogClose
     } = this.props
+
+    console.log(dialogState)
 
     return (
       <View style={styles.programs}>
@@ -69,8 +83,21 @@ class Programs extends React.Component {
           visible={modalVisible}
           onClose={modalClose}
         >
-          <AddProgramForm />
+          <AddProgramForm 
+            onSubmit={this.handleProgramCreate}
+          />
         </ModalContent>
+        <DialogComponent
+          loading={dialogState.loading}
+          title={dialogState.title}
+          success={dialogState.success}
+          failure={dialogState.failure}
+          visible={dialogState.isVisible}
+          onClose={dialogClose}
+          renderContent={this.renderDayPicker}
+          width={300}
+          height={300}
+        />
       </View>
     )
   }

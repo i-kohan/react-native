@@ -23,12 +23,8 @@ export default class DialogComponent extends React.Component{
     <ActivityIndicator size="large" color="0000ff" style={{alignSelf: 'center'}} />
   )
 
-  setStateOfDialog = (state) => {
-    this.setState({ ...state })
-  }
-
   getRenderFunc = ({ loading, success, failure }, renderContent) => {
-    let renderFn = renderContent(this.setStateOfDialog)
+    let renderFn = renderContent || null
     if (loading) renderFn = this.renderLoading
     if (success) renderFn = this.renderSuccess
     if (failure) renderFn = this.renderFailure
@@ -65,7 +61,7 @@ export default class DialogComponent extends React.Component{
       >
         <DialogContent >
           <View style={styles.content}>
-            {renderFn()}
+            {renderFn && renderFn()}
           </View>
         </DialogContent>
       </Dialog>

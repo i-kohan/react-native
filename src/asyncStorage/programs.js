@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native'
-import moment from 'moment'
 const STORE_KEY = '@programs'
 
 export const getPrograms = async () => { 
@@ -14,4 +13,5 @@ export const addProgram = async (program) => {
     parsedPrograms = []
   }
   parsedPrograms.push(program)
+  return await AsyncStorage.setItem(STORE_KEY, JSON.stringify(parsedPrograms))
 }
