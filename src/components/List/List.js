@@ -52,7 +52,7 @@ const List = ({
     return <NoDataMessage message={noDataMessage} />
   }
   return (
-    <ScrollView>
+    <View>
       <FlatList
         data={options}
         renderItem={renderItem({
@@ -65,7 +65,7 @@ const List = ({
         keyExtractor={keyExtractor}
         extraData={selected}
       />
-    </ScrollView>
+    </View>
   )
 }
 

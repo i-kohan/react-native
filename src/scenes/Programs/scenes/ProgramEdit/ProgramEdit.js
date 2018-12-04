@@ -2,10 +2,8 @@ import React from 'react'
 import { View, Text, Image, Picker, Button } from 'react-native'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import { connect } from 'react-redux'
-import { Card } from 'react-native-elements'
 
-
-import { List, DialogComponent, ProgramDescription } from '../../../../components'
+import { Program, DialogComponent } from '../../../../components'
 import { PICKER_OPTIONS } from './constants'
 
 import * as selectors from '../../redux/selectors'
@@ -19,14 +17,14 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  selectDay: (id) => dispatch(actions.selectDay(id)),
   assignProgram: (program, day) => dispatch(actions.assignProgram(program, day)),
+  selectDay: (id) => dispatch(actions.selectDay(id)),
   dialogLoading: () => dispatch(actions.dialogLoading),
   dialogClose: () => dispatch(actions.dialogClose),
   dialogOpen: () => dispatch(actions.dialogOpen),
 })
 
-class Program extends React.Component {
+class ProgramEdit extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({ addProgram: this.openDayDialog })
@@ -42,7 +40,7 @@ class Program extends React.Component {
   } 
  
   renderDayPicker = () => () => {
-    const { selectedDay, assignProgram, selectDay, program } = this.props
+    const { selectedDay, selectDay, program } = this.props
     return (
       <View>
         <Picker
@@ -58,21 +56,6 @@ class Program extends React.Component {
       </View>
     )
   }
-
-  renderLeftElement = (item) => () => (
-    <Image
-      style={{ width: 30, height: 30 }}
-      source={{ uri: item.icon }}
-    />
-  )
-
-  renderIcons = () => () => (
-    <Text>View more</Text>
-  )
-
-  renderCollapsibleArea = (item) => (
-    <Text>{item.description}</Text>
-  )
 
   render() {
     const {
@@ -92,21 +75,10 @@ class Program extends React.Component {
           width={300}
           height={300}
         />
-        <Card 
-          title={program.title}
-          image={{uri: 'http://piotrowicz.net/wp-content/uploads/2018/08/leg-day.png'}}  
-        >
-        <List
-          renderIcons={this.renderIcons}
-          renderLeftElement={this.renderLeftElement}
-          noDataMessage='No available exersices'
-          options={program.exercises}
-          renderCollapsibleArea={this.renderCollapsibleArea}
-        />
-        </Card>
+        <Program {...program} />
       </View>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Program)
+export default connect(mapStateToProps, mapDispatchToProps)(ProgramEdit)

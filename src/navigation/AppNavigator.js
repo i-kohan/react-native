@@ -49,7 +49,7 @@ const RouterComponent = () => (
         rightButtonImage={{uri: "https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2016/10/assign.png"}}
         onRight={({ navigation }) => navigation.state.params.addProgram()}
         key="Pprogram"
-        component={Routes.ProgramScene}
+        component={Routes.ProgramEditScene}
         title="Program"
         direction="verical"
       />

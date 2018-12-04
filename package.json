@@ -7,8 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "devtools": "react-devtools",
-    "debug": "rndebugger://set-debugger-loc?host=localhost&port=19001"
+    "devtools": "react-devtools"
   },
   "dependencies": {
     "axios": "^0.18.0",

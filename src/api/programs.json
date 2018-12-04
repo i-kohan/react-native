@@ -3,7 +3,7 @@
     "id": "1",
     "name": "legs",
     "title": "Program of legs trainig",
-    "imageURL": "assets:/programs/leg-day.png",
+    "imageURL": "http://piotrowicz.net/wp-content/uploads/2018/08/leg-day.png",
     "description": "Программа расчитана на прокачку ног, очень полезные упражнения, которые помогут за месяц привести ваши ноги в порядок!",
     "exercises": [
       {
@@ -17,7 +17,7 @@
         "id": "2",
         "title": "Развод ног",
         "icon": "http://steelsports.ru/wp-content/uploads/2014/09/56.jpg",
-        "imageURL": "https://media1.tenor.com/images/db65b2a4ee43d1205a89f76945d81de3/tenor.gif",
+        "imageURL": "https://superfit.me/wp-content/uploads/6/6-uprazhneniy-dlya-beder-i-nog/2.gif",
         "description": "Lhlkdhjslfkjadhs ljs dhfs foasd hfsf oiasdhf pasduhfpoasd hfasdf hjpasdfhas"
       }
     ]
@@ -26,6 +26,7 @@
     "id": "2",
     "name": "back",
     "title": "Program of Back training",
+    "imageURL": "http://cdn.shopify.com/s/files/1/1960/6293/articles/Muscles_back_small_b4492b17-05c2-474c-8b7d-f263b9531e81_1024x1024.png",
     "description": "Программа расчитана на прокачку спины, очень полезные упражнения, которые помогут за месяц привести вашу спину в порядок!",
     "exercises": [
       {

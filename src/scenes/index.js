@@ -1,2 +1,2 @@
 export { TrainingScheduleScene, TSProgramScene } from './TrainingSchedule'
-export { ProgramsScene, ProgramScene } from './Programs'
+export { ProgramsScene, ProgramEditScene } from './Programs'
