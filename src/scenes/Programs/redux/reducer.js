@@ -3,8 +3,9 @@ import moment from 'moment'
 
 const initialState = {
   loading: true,
-  selectedDay: moment(),
+  selectedDay: moment().format('dddd'),
   programs: [],
+  modalVisible: false,
   dialogState: { 
     isVisible: false,
     success: false,
@@ -33,6 +34,10 @@ export default reducer = (state = initialState, action) => {
       return { ...state, dialogState: { ...initialState.dialogState } }
     case types.SELECT_DAY:
       return { ...state, selectedDay: payload }
+    case types.MODAL_CLOSE: 
+      return { ...state, modalVisible: false }
+    case types.MODAL_OPEN:
+      return { ...state, modalVisible: true }
     default:
       return state
   }

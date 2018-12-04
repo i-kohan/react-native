@@ -38,7 +38,6 @@ const Program = ({
     <Card 
       title={title}
       image={{uri: imageURL}}
-      // containerStyle={{height: '100%', width: "100%"}}
     >
       <List
         renderIcons={renderIcons}

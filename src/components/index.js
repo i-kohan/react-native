@@ -1,5 +1,5 @@
 export { default as List } from './List/List.js'
 export { default as TouchableIcon } from './TouchableIcon/TouchableIcon'
 export { default as Program } from './Program/Program'
-export { ModalContent } from './ModalContent'
+export { default as ModalContent } from './ModalContent/ModalContent'
 export { default as DialogComponent } from './Dialog/Dialog'

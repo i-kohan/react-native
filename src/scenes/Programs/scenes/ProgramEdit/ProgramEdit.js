@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
 class ProgramEdit extends React.Component {
 
   componentDidMount() {
-    this.props.navigation.setParams({ addProgram: this.openDayDialog })
+    this.props.navigation.setParams({ assignProgramDialog: this.openDayDialog })
   }
 
   openDayDialog = () => {

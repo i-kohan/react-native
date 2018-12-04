@@ -1,29 +1,33 @@
 import React from 'react'
-import { View, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 
-import { getPrograms, getLoading } from './redux/selectors'
-import { init } from './redux/actions'
+import * as selectors from './redux/selectors'
+import * as actions from './redux/actions'
 
-import { List, TouchableIcon } from '../../components'
-import { Icon } from 'react-native-elements'
-import { Actions } from 'react-native-router-flux';
+import { List, TouchableIcon, ModalContent } from '../../components'
+import { AddProgramForm } from './scenes'
 
 import styles from './styles'
 
 const mapStateToProps = state => ({
-  programs: getPrograms(state),
-  loading: getLoading(state)
+  programs: selectors.getPrograms(state),
+  loading: selectors.getLoading(state),
+  modalVisible: selectors.getModalVisibility(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  init: () => dispatch(init)
+  init: () => dispatch(actions.init),
+  modalClose: () => dispatch(actions.modalClose),
+  modalOpen: () => dispatch(actions.modalOpen)
 })
 
 class Programs extends React.Component {
 
   componentDidMount() {
     this.props.init()
+    this.props.navigation.setParams({ addProgram: this.props.modalOpen })
   }
 
   routeToProgram = (program) => () => {
@@ -44,7 +48,9 @@ class Programs extends React.Component {
   render() {
     const {
       programs,
-      loading
+      loading,
+      modalVisible,
+      modalClose
     } = this.props
 
     return (
@@ -59,6 +65,12 @@ class Programs extends React.Component {
             renderIcons={this.renderIcons}
           />
         )}
+        <ModalContent 
+          visible={modalVisible}
+          onClose={modalClose}
+        >
+          <AddProgramForm />
+        </ModalContent>
       </View>
     )
   }

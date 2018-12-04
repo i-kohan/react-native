@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux'
 import { CalendarHeader } from './components'
 import { DialogComponent, List, TouchableIcon } from '../../../../components'
 
-import { removeProgram } from '../../../../asyncStorage/programs'
+import { removeProgram } from '../../../../asyncStorage/schedule'
 
 import { getCurrentDate, getLoading, getDaySchedule, getDialogState, getSelectedProgram } from './redux/selectors'
 import { dayChange, init, removeProgramAct, dialogOpen, dialogClose, selectProgram, dialogLoading } from './redux/actions'

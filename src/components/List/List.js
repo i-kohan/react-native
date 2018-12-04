@@ -25,7 +25,6 @@ const renderItem = ({
         subtitle={item.subtitle}
         onPress={onSelect(item.id)}
         checkbox
-        bottomDivider
         topDivider
       />
       {isSelected && renderCollapsibleArea && (
@@ -52,7 +51,9 @@ const List = ({
     return <NoDataMessage message={noDataMessage} />
   }
   return (
-    <View>
+    // Hack to make FlatList scrollable
+    // TODO: Remove this hack
+    <View style={{ width:'100%', height: 300 }}>
       <FlatList
         data={options}
         renderItem={renderItem({

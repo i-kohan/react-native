@@ -47,7 +47,7 @@ const RouterComponent = () => (
         modal
         rightButtonIconStyle={{width: 40, height: 40}}
         rightButtonImage={{uri: "https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2016/10/assign.png"}}
-        onRight={({ navigation }) => navigation.state.params.addProgram()}
+        onRight={({ navigation }) => navigation.state.params.assignProgramDialog()}
         key="Pprogram"
         component={Routes.ProgramEditScene}
         title="Program"

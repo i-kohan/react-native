@@ -5,8 +5,8 @@ import {
   FETCHING,
   REMOVE_PROGRAM
 } from './types'
-import { initSuccess, init, dayChanged, fetch, fetchSuccess, dialogLoading,removeSuccess, removeFailed } from './actions'
-import { getPrograms, removeProgram } from '../../../../../asyncStorage/programs'
+import { initSuccess, dayChanged, fetch, fetchSuccess, dialogLoading,removeSuccess, removeFailed } from './actions'
+import { getProgramsForDay, removeProgram } from '../../../../../asyncStorage/schedule'
 import moment from 'moment'
 
 // TODO: replace to utils
@@ -14,7 +14,7 @@ const getDayOfWeek = (date) => moment(date).format('dddd')
 
 export const initEpic = (action$, state$) => action$.pipe(
   filter(action => action.type === INIT),
-  switchMap(() => getPrograms(getDayOfWeek(state$.value.home.day.currentDate))),
+  switchMap(() => getProgramsForDay(getDayOfWeek(state$.value.home.day.currentDate))),
   map(initSuccess)
 )
   
@@ -31,20 +31,27 @@ export const changeDayEpic = (action$, state$) => action$.pipe(
   })
 )
 
-export const fetchDayEpic = (action$) => action$.pipe(
-  filter(action => action.type === FETCHING),
-  switchMap(({ payload }) => getPrograms(payload)),
+export const fetchDayEpic = (action$) => action$.ofType(FETCHING)
+.pipe(
+  switchMap(({ payload }) => { console.log(payload); return getProgramsForDay(payload)}),
   map(fetchSuccess)
 )
 
-export const removeProgramEpic = (action$) => action$.ofType(REMOVE_PROGRAM)
+export const removeProgramEpic = (action$, state$) => action$.ofType(REMOVE_PROGRAM)
   .pipe(
-    switchMap(({ payload }) => removeProgram(payload)),
-    mergeMap(() => [
-        fetch(),
+    switchMap(({ payload }) => {
+      const currentDate = state$.value.home.day.currentDate
+      const currentDay = getDayOfWeek(currentDate)
+      return removeProgram(payload, currentDay) 
+    }),
+    mergeMap(() => {
+      const currentDate = state$.value.home.day.currentDate
+      const currentDay = getDayOfWeek(currentDate)
+      return [
+        fetch(currentDay),
         removeSuccess,
       ]
-    ),
+    }),
     catchError(removeFailed),
   )
 // action$.pipe(

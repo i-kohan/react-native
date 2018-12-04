@@ -9,3 +9,5 @@ export const assignFailed = { type: types.ASSIGN_FAILED }
 export const dialogLoading = { type: types.DIALOG_LOADING }
 export const dialogClose = { type: types.DIALOG_CLOSE }
 export const dialogOpen = { type: types.DIALOG_OPEN }
+export const modalOpen = { type: types.MODAL_OPEN }
+export const modalClose = { type: types.MODAL_CLOSE }
