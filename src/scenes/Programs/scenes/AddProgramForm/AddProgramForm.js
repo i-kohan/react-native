@@ -16,12 +16,14 @@ class AddProgramForm extends React.Component {
   state = {
     title: '',
     description: '',
-    imageURL: 'https://www.freeiconspng.com/uploads/-expander-fitness-trainer-fitness-room-gym-gymnastic-health-512-17.png'
+    imageURL: 'http://piotrowicz.net/wp-content/uploads/2018/08/leg-day.png'
   }
 
   handleSubmit = () => {
-    const value = this._form.getValue();
-    this.props.onSubmit(value)
+    const value = this._form.getValue()
+    if (value) {
+      this.props.onSubmit(value)
+    }
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   programs: selectors.getPrograms(state),
   loading: selectors.getLoading(state),
   modalVisible: selectors.getModalVisibility(state),
-  dialogState: selectors.getDialogState(state)
+  dialogState: selectors.getDialogState(state),
+  selectedProgram: selectors.getSelectedProgram(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -25,6 +26,9 @@ const mapDispatchToProps = dispatch => ({
   handleProgramCreate: (program) => dispatch(actions.createProgram(program)),
   dialogClose: () => dispatch(actions.dialogClose),
   dialogLoading: () => dispatch(actions.dialogLoading),
+  dialogOpen: () => dispatch(actions.dialogOpen),
+  selectProgram: (id) => dispatch(actions.selectProgram(id)),
+  removeProgram: (id) => dispatch(actions.removeProgram(id))
 })
 
 class Programs extends React.Component {
@@ -32,6 +36,25 @@ class Programs extends React.Component {
   componentDidMount() {
     this.props.init()
     this.props.navigation.setParams({ addProgram: this.props.modalOpen })
+  }
+
+  openDialog = (id) => () => {
+    this.props.selectProgram(id)
+    this.props.dialogOpen()
+  }
+
+  renderConfirm = () => (
+    <View style={styles.confirmButtons}>
+      <View style={{marginRight: 8}} >
+        <Button title='Yes' onPress={this.handleRemoveProgram} />
+      </View>
+      <Button title='No' onPress={this.props.dialogClose}/>
+    </View>
+  )
+
+  handleRemoveProgram = () => {
+    this.props.dialogLoading()
+    this.props.removeProgram(this.props.selectedProgram)
   }
 
   handleProgramCreate = (program) => {
@@ -46,6 +69,12 @@ class Programs extends React.Component {
 
   renderIcons = (item) => () => (
     <View style={styles.icons}>
+      <TouchableIcon
+        style={styles.iconRemove}
+        iconSize={25}
+        iconName='trash'
+        onClick={this.openDialog(item.id)}
+      />
       <TouchableIcon
         style={styles.iconGoTo}
         iconSize={15}
@@ -64,8 +93,6 @@ class Programs extends React.Component {
       dialogState,
       dialogClose
     } = this.props
-
-    console.log(dialogState)
 
     return (
       <View style={styles.programs}>
@@ -94,7 +121,7 @@ class Programs extends React.Component {
           failure={dialogState.failure}
           visible={dialogState.isVisible}
           onClose={dialogClose}
-          renderContent={this.renderDayPicker}
+          renderContent={this.renderConfirm}
           width={300}
           height={300}
         />

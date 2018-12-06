@@ -13,3 +13,5 @@ export const modalOpen = { type: types.MODAL_OPEN }
 export const modalClose = { type: types.MODAL_CLOSE }
 export const createProgram = (program) => ({ type: types.CREATE_PROGRAM, payload: { program } })
 export const createProgramSuccess = { type: types.CREATE_PROGRAM_SUCCESS }
+export const selectProgram = (id) => ({ type: types.SELECT_PROGRAM, payload: id })
+export const removeProgram = (id) => ({ type: types.REMOVE_PROGRAM, payload: id })

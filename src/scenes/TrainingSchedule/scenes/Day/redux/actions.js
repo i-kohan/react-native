@@ -8,7 +8,7 @@ export const fetchSuccess = (daySchedule) => ({ type: types.FETCH_SUCCESS, paylo
 export const initSuccess = (daySchedule) => ({ type: types.INIT_SUCCESS, payload: { daySchedule } })
 export const closeModal = { type: types.CLOSE_MODAL }
 export const openModal = (id) => ({ type: types.OPEN_MODAL, payload: id })
-export const removeProgramAct = (id) => ({ type: types.REMOVE_PROGRAM, payload: id })
+export const removeProgram = (id) => ({ type: types.REMOVE_PROGRAM, payload: id })
 export const removeSuccess = { type: types.REMOVE_SUCCESS }
 export const removeFailed = { type: types.REMOVE_FAILED }
 export const dialogLoading = { type: types.DIALOG_LOADING }

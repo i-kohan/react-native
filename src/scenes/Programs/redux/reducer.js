@@ -38,6 +38,8 @@ export default reducer = (state = initialState, action) => {
       return { ...state, modalVisible: false }
     case types.MODAL_OPEN:
       return { ...state, modalVisible: true }
+    case types.SELECT_PROGRAM:
+      return { ...state, selectedProgram: payload }
     default:
       return state
   }

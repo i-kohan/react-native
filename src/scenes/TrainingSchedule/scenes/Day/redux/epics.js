@@ -33,7 +33,7 @@ export const changeDayEpic = (action$, state$) => action$.pipe(
 
 export const fetchDayEpic = (action$) => action$.ofType(FETCHING)
 .pipe(
-  switchMap(({ payload }) => { console.log(payload); return getProgramsForDay(payload)}),
+  switchMap(({ payload }) => getProgramsForDay(payload)),
   map(fetchSuccess)
 )
 

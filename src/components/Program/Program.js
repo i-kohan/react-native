@@ -18,10 +18,6 @@ const renderIcons = () => () => (
 const  renderCollapsibleArea = (item) => (
   <View>
     <Text>{item.description}</Text>
-    <Text>{item.description}</Text>
-
-    <Text>{item.description}</Text>
-
     <Image
       style={{ width: 150, height: 150 }}
       source={{ uri: item.imageURL }}

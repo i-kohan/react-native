@@ -7,10 +7,9 @@ import { Actions } from 'react-native-router-flux'
 import { CalendarHeader } from './components'
 import { DialogComponent, List, TouchableIcon } from '../../../../components'
 
-import { removeProgram } from '../../../../asyncStorage/schedule'
 
 import { getCurrentDate, getLoading, getDaySchedule, getDialogState, getSelectedProgram } from './redux/selectors'
-import { dayChange, init, removeProgramAct, dialogOpen, dialogClose, selectProgram, dialogLoading } from './redux/actions'
+import { dayChange, init, removeProgram, dialogOpen, dialogClose, selectProgram, dialogLoading } from './redux/actions'
 
 import styles from './styles'
 
@@ -25,7 +24,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   init: () => dispatch(init),
   onDayChange: (days) => dispatch(dayChange(days)),
-  removeProgram: (id) => dispatch(removeProgramAct(id)),
+  removeProgram: (id) => dispatch(removeProgram(id)),
   dialogOpen: () => dispatch(dialogOpen),
   dialogClose: () => dispatch(dialogClose),
   dialogLoading: () => dispatch(dialogLoading),
@@ -34,20 +33,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Day extends React.PureComponent {
 
-  state = {
-    programIdRemove: '',
-  }
-
   componentDidMount() {
     this.props.init()
-  }
-
-  openDayDialog = (id) => () => {
-    this.setState({ dialogVisible: true, programIdRemove: id })
-  }
-  
-  closeDayDialog = () => {
-    this.setState({ dialogVisible: false })
   }
 
   removeProgram = () => {

@@ -6,7 +6,7 @@ import * as actions from './actions'
 import { fetch } from '../../TrainingSchedule/scenes/Day/redux/actions'
 
 import { setProgramToSchedule } from '../../../asyncStorage/schedule'
-import { getPrograms, addProgram } from '../../../asyncStorage/programs'
+import { getPrograms, addProgram, removeProgram } from '../../../asyncStorage/programs'
 
 const getDayOfWeek = (date) => date.format('dddd')  
 
@@ -35,7 +35,21 @@ export const assignEpic = (action$, state$) => action$.ofType(types.ASSIGN_PROGR
 export const createProgramEpic = (action$) => action$.ofType(types.CREATE_PROGRAM)
   .pipe(
     delay(1000),
-    switchMap(({ payload: { program } }) => { console.log(program) ; return addProgram(program) }),
-    map(() => actions.dialogSuccess),
+    switchMap(({ payload: { program } }) => addProgram(program)),
+    mergeMap(() => [
+      actions.init,
+      actions.dialogSuccess
+    ]),
+    catchError(actions.dialogFailure)
+  )
+
+export const removeProgramEpic = (action$) => action$.ofType(types.REMOVE_PROGRAM)
+  .pipe(
+    delay(1000),
+    switchMap(({payload}) => removeProgram(payload)),
+    mergeMap(() => [
+      actions.init,
+      actions.dialogSuccess
+    ]),
     catchError(actions.dialogFailure)
   )

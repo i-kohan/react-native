@@ -1,38 +1,12 @@
 import { AsyncStorage } from 'react-native'
 import moment from 'moment'
 
+import { addUniqItem, removeItem } from './utils'
+
 const STORE_KEY = '@schedule'
 
 const timeout = (ms = 2000) => new Promise(res => setTimeout(res, ms))
-
-const addItem = (items, itemToAdd) => {
-  let newItems
-  const exists = items.find(i => i.id === itemToAdd.id)
-  if (exists) {
-    newItems = items.reduce((acc, cur) => {
-      if (cur.id === itemToAdd.id) {
-        acc.push(itemToAdd)
-      } else {
-        acc.push(cur)
-      }
-      return acc
-    }, [])
-  } else {
-    newItems = [ ...items, itemToAdd]
-  }
-  return newItems
-}
-
-const removeItem = (items, itemIdToRemove) => {
-  return items.reduce(( acc, cur ) => {
-    if (cur.id !== itemIdToRemove) {
-      acc.push(cur)
-    }
-    return acc
-  }, [])
-}
   
-
 export const getProgramsForDay = async (day = moment().format('dddd')) => {
   try {
     const storageItems = await AsyncStorage.getItem(`${STORE_KEY}:${day}`)
@@ -42,7 +16,6 @@ export const getProgramsForDay = async (day = moment().format('dddd')) => {
   }
 }
 
-
 export const setProgramToSchedule = async (program, day = moment().format('dddd')) => {
   try {
     let storageItems = await AsyncStorage.getItem(`${STORE_KEY}:${day}`)
@@ -51,7 +24,7 @@ export const setProgramToSchedule = async (program, day = moment().format('dddd'
     } else {
       storageItems = JSON.parse(storageItems)
     }
-    const newStorageItems = addItem(storageItems, program)
+    const newStorageItems = addUniqItem(storageItems, program)
     return await AsyncStorage.setItem(`${STORE_KEY}:${day}`, JSON.stringify(newStorageItems))
   } catch (err) {
     console.error(err)
