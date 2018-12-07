@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, StatusBar } from 'react-native'
-import { Scene, Router, Modal, Lightbox } from 'react-native-router-flux'
+import { Image, StatusBar, View } from 'react-native'
+import { Scene, Router } from 'react-native-router-flux'
 import { Icon } from 'react-native-elements'
 
 import * as Routes from '../scenes'
@@ -45,9 +45,24 @@ const RouterComponent = () => (
       </Scene>
       <Scene
         modal
-        rightButtonIconStyle={{width: 40, height: 40}}
-        rightButtonImage={{uri: "https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2016/10/assign.png"}}
-        onRight={({ navigation }) => navigation.state.params.assignProgramDialog()}
+        renderRightButton={(props) => (
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: 60, marginRight: 20 }}>
+            <Icon
+              type="font-awesome"
+              name="tasks"
+              color="green"
+              size={25}
+              onPress={props.assignProgramDialog}
+            />
+            <Icon
+              type="font-awesome"
+              name="edit"
+              color="green"
+              size={25}
+              onPress={() => console.log(props, 1222222222222222223)}
+            />
+          </View>
+        )}
         key="Pprogram"
         component={Routes.ProgramEditScene}
         title="Program"

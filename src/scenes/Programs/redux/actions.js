@@ -15,3 +15,5 @@ export const createProgram = (program) => ({ type: types.CREATE_PROGRAM, payload
 export const createProgramSuccess = { type: types.CREATE_PROGRAM_SUCCESS }
 export const selectProgram = (id) => ({ type: types.SELECT_PROGRAM, payload: id })
 export const removeProgram = (id) => ({ type: types.REMOVE_PROGRAM, payload: id })
+export const createExercise = (exercise, programId) => ({ type: types.CREATE_EXERCISE, payload: { exercise, programId } })
+export const removeExercise = (id) => ({ type: types.REMOVE_EXERCISE, payload: id })

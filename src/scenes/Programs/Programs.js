@@ -64,6 +64,7 @@ class Programs extends React.Component {
   }
 
   routeToProgram = (program) => () => {
+    this.props.selectProgram(program.id)
     Actions.Pprogram({ program, title: program.title })
   }
 

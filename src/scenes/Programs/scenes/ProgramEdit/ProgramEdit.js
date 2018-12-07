@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text, Image, Picker, Button } from 'react-native'
-import ImageViewer from 'react-native-image-zoom-viewer'
+import { View, Picker, Button } from 'react-native'
 import { connect } from 'react-redux'
 
-import { Program, DialogComponent } from '../../../../components'
+import { Program, DialogComponent, ModalContent } from '../../../../components'
+import AddExerciseForm from '../AddExerciseForm/AddExerciseForm'
 import { PICKER_OPTIONS } from './constants'
 
 import * as selectors from '../../redux/selectors'
@@ -13,7 +13,9 @@ import styles from './styles'
 
 const mapStateToProps = (state) => ({
   dialogState: selectors.getDialogState(state),
-  selectedDay: selectors.getSelectedDay(state)
+  selectedDay: selectors.getSelectedDay(state),
+  modalVisible: selectors.getModalVisibility(state),
+  selectedProgram: selectors.getSelectedProgram(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -22,6 +24,9 @@ const mapDispatchToProps = (dispatch) => ({
   dialogLoading: () => dispatch(actions.dialogLoading),
   dialogClose: () => dispatch(actions.dialogClose),
   dialogOpen: () => dispatch(actions.dialogOpen),
+  modalOpen: () => dispatch(actions.modalOpen),
+  modalClose: () => dispatch(actions.modalClose),
+  handleExerciseCreate: (exercise, programId) => dispatch(actions.createExercise(exercise, programId))
 })
 
 class ProgramEdit extends React.Component {
@@ -37,9 +42,17 @@ class ProgramEdit extends React.Component {
   assign = (program, selectedDay) => () => {
     this.props.dialogLoading()
     this.props.assignProgram(program, selectedDay)
-  } 
+  }
+
+  handleExerciseCreate = (exercise) => {
+    this.props.modalClose()
+    this.props.dialogLoading()
+    this.props.handleExerciseCreate(exercise, this.props.selectedProgram)
+  }
+  
+  handleAddPress = () => this.props.modalOpen()
  
-  renderDayPicker = () => () => {
+  renderDayPicker = () => {
     const { selectedDay, selectDay, program } = this.props
     return (
       <View>
@@ -60,7 +73,9 @@ class ProgramEdit extends React.Component {
   render() {
     const {
       program,
-      dialogState
+      dialogState,
+      modalVisible,
+      modalClose
     } = this.props
     return (
       <View style={{marginTop: 20}}>
@@ -75,7 +90,10 @@ class ProgramEdit extends React.Component {
           width={300}
           height={300}
         />
-        <Program {...program} />
+        <Program {...program} addButton onAddPress={this.handleAddPress}/>
+        <ModalContent visible={modalVisible} onClose={modalClose}>
+          <AddExerciseForm onSubmit={this.handleExerciseCreate}/>
+        </ModalContent>
       </View>
     )
   }

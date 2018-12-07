@@ -52,8 +52,8 @@ const List = ({
   }
   return (
     // Hack to make FlatList scrollable
-    // TODO: Remove this hack
-    <View style={{ width:'100%', height: 300 }}>
+    // TODO: Remove this hack ~>
+    <View style={{}}>
       <FlatList
         data={options}
         renderItem={renderItem({

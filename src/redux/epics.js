@@ -10,5 +10,6 @@ export default combineEpics(
   programsEpics.initEpic,
   programsEpics.assignEpic,
   programsEpics.createProgramEpic,
-  programsEpics.removeProgramEpic
+  programsEpics.removeProgramEpic,
+  programsEpics.createExerciseEpic
 )

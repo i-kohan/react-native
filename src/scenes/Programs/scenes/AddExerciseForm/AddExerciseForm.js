@@ -3,20 +3,22 @@ import { View, Button, StyleSheet } from 'react-native'
 import t from 'tcomb-form-native'
 
 
-const Program = t.struct({
+const Exercise = t.struct({
   title: t.String,
   description: t.String,
-  imageURL: t.String
+  imageURL: t.String,
+  icon: t.String
 })
 
 const Form = t.form.Form
 
-class AddProgramForm extends React.Component {
+class AddExerciseForm extends React.Component {
 
   state = {
     title: '',
     description: '',
-    imageURL: 'http://piotrowicz.net/wp-content/uploads/2018/08/leg-day.png'
+    imageURL: 'http://piotrowicz.net/wp-content/uploads/2018/08/leg-day.png',
+    icon: 'http://steelsports.ru/wp-content/uploads/2014/09/56.jpg'
   }
 
   handleSubmit = () => {
@@ -32,7 +34,7 @@ class AddProgramForm extends React.Component {
         <Form 
           ref={ref => this._form = ref}
           value={this.state}
-          type={Program}
+          type={Exercise}
         />
         <Button title="Create" onPress={this.handleSubmit}/>
       </View>
@@ -49,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddProgramForm
+export default AddExerciseForm

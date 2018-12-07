@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, Button } from 'react-native'
 import { Card } from 'react-native-elements'
 
 import List from '../List/List'
@@ -28,13 +28,17 @@ const  renderCollapsibleArea = (item) => (
 const Program = ({
   title,
   imageURL,
-  exercises
+  exercises,
+  addButton,
+  onAddPress
 }) => (
   <View>
     <Card 
       title={title}
       image={{uri: imageURL}}
+
     >
+      {addButton && <Button title="Add new exercise" onPress={onAddPress}/>}
       <List
         renderIcons={renderIcons}
         renderLeftElement={renderLeftElement}
