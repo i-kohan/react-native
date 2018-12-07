@@ -1,4 +1,4 @@
-import { mergeMap, switchMap,map, catchError, delay } from 'rxjs/operators'
+import { mergeMap, switchMap,map, catchError, delay, endWith } from 'rxjs/operators'
 
 import * as types from './types'
 import * as actions from './actions'
@@ -36,7 +36,11 @@ export const createExerciseEpic = action$ => action$.ofType(types.CREATE_EXERCIS
   .pipe(
     delay(1000),
     switchMap(({ payload: { exercise, programId } }) => addExercise(exercise, programId)),
-    map(() => actions.dialogSuccess),
+    mergeMap(() => [
+      actions.init,
+      actions.dialogSuccess
+    ]),
+    endWith(() => console.log('dljfghkjdhfsghkldshglkdfshjglkdfshglkdfshglkdf')),
     catchError(actions.dialogFailure)
   )
 
@@ -48,7 +52,7 @@ export const createProgramEpic = (action$) => action$.ofType(types.CREATE_PROGRA
       actions.init,
       actions.dialogSuccess
     ]),
-    catchError(actions.dialogFailure)
+    catchError(actions.dialogFailure),
   )
 
 export const removeProgramEpic = (action$) => action$.ofType(types.REMOVE_PROGRAM)

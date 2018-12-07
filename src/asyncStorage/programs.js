@@ -44,7 +44,7 @@ export const addExercise = async (exercise, programId) => {
     if (!Array.isArray(curProgram.exercises)) {
       curProgram.exercises = []
     }
-    curProgram.exercises.push({ ...exercise, id: `${Math.random * 1000000}` })
+    curProgram.exercises.push({ ...exercise, id: `${Math.random() * 1000000}` })
     return await AsyncStorage.setItem(STORE_KEY, JSON.stringify(parsedPrograms))
   } catch (err) {
     console.error(err)

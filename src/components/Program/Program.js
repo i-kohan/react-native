@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, Button } from 'react-native'
+import { View, Image, Text, Button, ScrollView } from 'react-native'
 import { Card } from 'react-native-elements'
 
 import List from '../List/List'
@@ -32,11 +32,10 @@ const Program = ({
   addButton,
   onAddPress
 }) => (
-  <View>
+  <ScrollView>
     <Card 
       title={title}
       image={{uri: imageURL}}
-
     >
       {addButton && <Button title="Add new exercise" onPress={onAddPress}/>}
       <List
@@ -47,7 +46,7 @@ const Program = ({
         renderCollapsibleArea={renderCollapsibleArea}
       />
     </Card>
-  </View>
+  </ScrollView>
 )
 
 export default Program

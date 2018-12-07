@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withState, withHandlers, pure, compose } from 'recompose'
 import { View, FlatList, ScrollView, Animated } from 'react-native'
 import { ListItem } from 'react-native-elements'
+import { TranslateYAndOpacity, ScaleAndOpacity } from 'react-native-motion'
+
 import { NoDataMessage } from '../noDataMessage/noDataMessage.tsx'
 
 import styles from './styles.js'
@@ -28,9 +30,9 @@ const renderItem = ({
         topDivider
       />
       {isSelected && renderCollapsibleArea && (
-        <Animated.View>
+        <ScaleAndOpacity duration={100}>
           {renderCollapsibleArea(item)}
-        </Animated.View>
+        </ScaleAndOpacity>
       )}
     </View>
   )
@@ -53,19 +55,26 @@ const List = ({
   return (
     // Hack to make FlatList scrollable
     // TODO: Remove this hack ~>
-    <View style={{}}>
-      <FlatList
-        data={options}
-        renderItem={renderItem({
-          onSelect,
-          selected,
-          renderCollapsibleArea,
-          renderIcons,
-          renderLeftElement
-        })}
-        keyExtractor={keyExtractor}
-        extraData={selected}
-      />
+    <View style={{ marginBottom: 20 }}>
+      <TranslateYAndOpacity
+        startOnDidMount
+        opacityMin={0}
+        translateYMin={100}
+        duration={10} 
+      >
+        <FlatList
+          data={options}
+          renderItem={renderItem({
+            onSelect,
+            selected,
+            renderCollapsibleArea,
+            renderIcons,
+            renderLeftElement
+          })}
+          keyExtractor={keyExtractor}
+          extraData={selected}
+        />
+      </TranslateYAndOpacity>
     </View>
   )
 }

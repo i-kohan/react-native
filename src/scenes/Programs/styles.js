@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
   programs: {
+    height: '100%',
     marginTop: 10
   },
   icons: {
